@@ -876,17 +876,69 @@
     .arrow { transform: rotate(90deg); padding: 8px 0; }
   }
   @media (max-width: 768px) {
-    section, .cta-final { padding: 72px 0; }
-    .hero { padding: 64px 0 48px; }
+    /* d-br = quebras de linha so pra desktop. Em mobile texto reflui natural */
+    .d-br { display: none; }
+
+    section, .cta-final { padding: 64px 0; }
+    .container, .container-sm { padding: 0 20px; }
+    .hero { padding: 56px 0 40px; }
+
+    /* Headers menores e respiram melhor */
+    h1 { font-size: clamp(26px, 7vw, 36px); line-height: 1.15; }
+    h2 { font-size: clamp(26px, 6.5vw, 36px); line-height: 1.15; }
+    .lead { font-size: 16px; margin-bottom: 40px; }
+
+    /* Hero compactacao */
+    .hero-sub { font-size: 15px; margin-bottom: 28px; }
+    .hero-checks { flex-direction: column; align-items: center; gap: 12px; margin-bottom: 32px; }
+    .cta-primary { padding: 16px 28px; font-size: 15px; width: 100%; max-width: 360px; justify-content: center; }
+    .nav-cta { padding: 8px 14px; font-size: 12px; }
+    .logo { font-size: 16px; }
+    nav { padding: 12px 0; }
+
+    /* Grids viram 1 coluna */
     .compare { grid-template-columns: 1fr; }
     .compare-col.good { border-left: none; border-top: 1px solid var(--accent); }
-    .matheus-grid { grid-template-columns: 1fr; gap: 32px; }
-    .matheus-numeros { grid-template-columns: 1fr; gap: 16px; text-align: center; }
-    .veiculo { grid-template-columns: 1fr; gap: 12px; padding: 28px; }
-    .hero-checks { flex-direction: column; align-items: center; gap: 12px; }
-    .agora-box { padding: 40px 28px; }
-    .compare-col { padding: 32px; }
-    .etapa { padding: 32px 24px; }
+    .compare-col { padding: 28px; }
+    .matheus-grid { grid-template-columns: 1fr; gap: 28px; }
+    .matheus-img-wrap { max-width: 320px; margin: 0 auto; }
+    .matheus-numeros { grid-template-columns: 1fr; gap: 14px; text-align: left; }
+    .matheus-numeros .num-bloco { display: flex; align-items: baseline; gap: 12px; }
+    .matheus-numeros .num-bloco .num { font-size: 26px; margin: 0; }
+    .veiculo { grid-template-columns: 1fr; gap: 8px; padding: 24px; }
+    .veiculo-num { font-size: 36px; }
+    .agora-box { padding: 32px 22px; }
+    .etapa { padding: 28px 22px; }
+    .belief-section { padding: 80px 16px; }
+    .belief-manchete { font-size: clamp(34px, 9vw, 56px); margin-bottom: 20px; }
+    .belief-sub { font-size: 16px; }
+
+    /* Stack-list nao pode ser sticky em mobile */
+    .stack-list { gap: 12px !important; padding-bottom: 0 !important; }
+    .stack-list .stack-item { position: static !important; margin-top: 0 !important; padding: 22px 24px; }
+    .stack-item { grid-template-columns: 36px 1fr; gap: 16px; }
+
+    /* Roadmap layout vertical com linha entre cards */
+    .roadmap-marker { width: 56px; height: 56px; font-size: 18px; }
+
+    /* CTA final mais compacto */
+    .cta-final { padding: 88px 0; }
+    .cta-final h2 { font-size: clamp(28px, 7vw, 38px); }
+
+    /* Footer empilha */
+    footer .container { flex-direction: column; align-items: flex-start; }
+    footer .legal { font-size: 11px; }
+
+    /* Tese-destaque (caso volte) */
+    .tese-destaque { padding: 32px 24px; font-size: 18px; }
+
+    /* Inputs/buttons not breaking */
+    .stack-footer { padding: 28px 22px; }
+  }
+  @media (max-width: 380px) {
+    .nav-cta { display: none; }
+    h1 { font-size: 24px; }
+    .belief-manchete { font-size: 30px; }
   }
 </style>
 </head>
@@ -903,8 +955,8 @@
 <section class="hero">
   <div class="container hero-content">
     <h1 class="rv" data-d="1">
-      O sistema que faz quem procura advogado<br>
-      <em>encontrar, escolher e fechar</em> com você,<br>
+      O sistema que faz quem procura advogado<br class="d-br">
+      <em>encontrar, escolher e fechar com você,</em><br class="d-br">
       antes de chegar no concorrente.
     </h1>
     <p class="hero-sub rv" data-d="2">Em 30 dias, dentro do código de ética, sem virar refém de indicação nem precisar gravar vídeo. As 3 etapas do Protocolo 3C instaladas e rodando no seu escritório.</p>
@@ -925,7 +977,7 @@
 <section class="section-light">
   <div class="container">
     <div class="rv" style="text-align: center; margin-bottom: 56px;">
-      <h2>Se você é advogado, um desses<br><em>4 está acontecendo agora.</em></h2>
+      <h2>Se você é advogado, um desses<br class="d-br"><em>4 está acontecendo agora.</em></h2>
     </div>
     <div class="dor-grid">
       <div class="dor-card rv"><div class="dor-num">01</div><p>Seu caixa oscila demais. Mês de R$ 40 mil seguido de mês de R$ 8 mil.</p></div>
@@ -1048,7 +1100,7 @@
 <section class="section-light">
   <div class="container-sm">
     <div class="rv" style="text-align: center; margin-bottom: 48px;">
-      <h2>Por que isso é diferente<br><em>do que você já viu:</em></h2>
+      <h2>Por que isso é diferente<br class="d-br"><em>do que você já viu:</em></h2>
     </div>
     <div class="compare rv">
       <div class="compare-col bad">
@@ -1084,7 +1136,7 @@
 <section>
   <div class="container-sm">
     <div class="agora-box rv">
-      <h2>A vaga do primeiro lugar<br><em>é uma só.</em></h2>
+      <h2>A vaga do primeiro lugar<br class="d-br"><em>é uma só.</em></h2>
       <p>Cada mês que passa, mais escritórios da sua cidade estão instalando sistema. Quem busca advogado na sua área <strong>hoje encontra eles, não você</strong>.</p>
       <p><strong>O Google não mostra dois primeiros lugares.</strong> Existe UM primeiro. E enquanto você adia a decisão, alguém na sua região ocupa essa vaga.</p>
       <p>Recuperar terreno depois custa muito mais caro do que chegar primeiro. Não porque o investimento sobe, mas porque o mercado fica mais maduro, mais competitivo, e mais difícil de furar.</p>
@@ -1160,7 +1212,7 @@
 <section class="section-light">
   <div class="container-sm">
     <div class="rv" style="text-align: center; margin-bottom: 56px;">
-      <h2>O que acontece depois<br><em>que você clica no botão:</em></h2>
+      <h2>O que acontece depois<br class="d-br"><em>que você clica no botão:</em></h2>
     </div>
     <ol class="roadmap" id="roadmap">
       <li class="roadmap-step">
