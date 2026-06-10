@@ -408,7 +408,29 @@
   }
   .belief-sub strong { color: var(--text); font-weight: 600; }
   .belief-sub strong.lime { color: var(--accent); font-weight: 600; }
-  @media (max-width: 600px) { .belief-section { padding: 88px 16px; } }
+  .belief-arrow {
+    display: flex;
+    justify-content: center;
+    margin-top: 56px;
+    position: relative;
+    z-index: 2;
+  }
+  .belief-arrow svg {
+    width: 48px;
+    height: 48px;
+    color: var(--accent);
+    animation: arrowBounce 2.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    filter: drop-shadow(0 0 12px var(--accent-dim-2));
+  }
+  @keyframes arrowBounce {
+    0%, 100% { transform: translateY(0); opacity: 0.7; }
+    50% { transform: translateY(14px); opacity: 1; }
+  }
+  @media (max-width: 600px) {
+    .belief-section { padding: 88px 16px; }
+    .belief-arrow { margin-top: 36px; }
+    .belief-arrow svg { width: 36px; height: 36px; }
+  }
 
   /* PROTOCOLO */
   .protocolo-intro { text-align: center; margin-bottom: 64px; }
@@ -555,7 +577,7 @@
   .agora-box p.destaque em { color: var(--accent); }
 
   /* STACK */
-  .stack-list { display: grid; gap: 12px; max-width: 780px; margin: 0 auto 48px; position: relative; }
+  .stack-list { display: grid; gap: 12px; max-width: 780px; margin: 0 auto 24px; position: relative; }
   .stack-item {
     background: var(--bg-card);
     border: 1px solid var(--border);
@@ -584,7 +606,7 @@
 
   /* sticky-stack desktop */
   @media (min-width: 900px) {
-    .stack-list { gap: 0; padding-bottom: 30vh; }
+    .stack-list { gap: 0; padding-bottom: 0; }
     .stack-list .stack-item { position: sticky; }
     .stack-list .stack-item:nth-child(1) { top: 96px; z-index: 1; }
     .stack-list .stack-item:nth-child(2) { top: 112px; z-index: 2; margin-top: 16px; }
@@ -752,8 +774,10 @@
   @media (max-width: 768px) {
     .roadmap { grid-template-columns: 1fr; gap: 28px; }
     .roadmap::before, .roadmap::after { display: none; }
-    .roadmap-step { display: grid; grid-template-columns: 80px 1fr; gap: 20px; text-align: left; align-items: start; }
-    .roadmap-marker { margin: 0; }
+    .roadmap-step { display: grid; grid-template-columns: 80px 1fr; column-gap: 20px; row-gap: 4px; text-align: left; align-items: start; }
+    .roadmap-marker { margin: 0; grid-row: 1 / span 2; }
+    .roadmap-step h4 { grid-column: 2; margin-bottom: 4px; }
+    .roadmap-step p { grid-column: 2; }
     .roadmap-step:not(:last-child) .roadmap-marker::after {
       content: '';
       position: absolute;
@@ -1034,6 +1058,9 @@
   <div class="belief-inner">
     <h2 class="belief-manchete rv">Essa é <em>a única forma.</em></h2>
     <p class="belief-sub rv" data-d="1">de ter um escritório com <strong class="lime">caixa previsível</strong> sem depender de indicação nem virar influencer. É exatamente isso que o <strong>Protocolo 3C</strong> entrega.</p>
+    <div class="belief-arrow rv" data-d="2" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+    </div>
   </div>
 </section>
 
@@ -1041,7 +1068,7 @@
 <section>
   <div class="container">
     <div class="protocolo-intro rv">
-      <h2>O <em>Protocolo 3C.</em></h2>
+      <h2 class="belief-manchete">O <em>Protocolo 3C.</em></h2>
       <p class="lead">Três etapas plugadas, rodando todos os dias no seu escritório. Você não compra anúncio avulso. Você instala um <strong style="color:var(--text)">sistema completo</strong> de Captação, Conversão e Crescimento.</p>
     </div>
     <div class="etapas-flow">
