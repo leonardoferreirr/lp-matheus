@@ -41,7 +41,7 @@
     --shadow-clip: 0 1px 2px rgba(74, 47, 12, 0.12), 0 6px 18px rgba(74, 47, 12, 0.08), 0 24px 50px rgba(74, 47, 12, 0.10);
     --shadow-clip-hover: 0 2px 6px rgba(74, 47, 12, 0.14), 0 12px 28px rgba(74, 47, 12, 0.14), 0 36px 80px rgba(74, 47, 12, 0.18);
 
-    /* máscara SVG de "recorte de papel" — bordas Bezier orgânicas */
+    /* máscara SVG de "recorte de papel" , bordas Bezier orgânicas */
     --tear-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 600' preserveAspectRatio='none'%3E%3Cpath fill='black' d='M 5,12 C 60,4 110,18 165,10 C 220,4 268,18 325,10 C 380,4 430,18 488,8 C 545,2 595,16 650,10 C 705,4 755,18 810,10 C 865,4 915,18 970,8 C 985,6 992,10 996,14 L 996,586 C 950,594 905,578 850,588 C 795,596 745,580 690,590 C 635,594 580,582 525,590 C 470,594 420,578 365,588 C 310,596 260,580 205,590 C 150,594 100,582 55,588 C 30,590 12,588 5,584 Z'/%3E%3C/svg%3E");
   }
 
@@ -182,7 +182,7 @@
     pointer-events: none;
   }
 
-  /* marcador (highlight amarelo de caneta) — variante */
+  /* marcador (highlight amarelo de caneta) , variante */
   .marked {
     background: linear-gradient(180deg, transparent 60%, var(--accent-mark) 60%, var(--accent-mark) 92%, transparent 92%);
     padding: 0 4px;
@@ -191,17 +191,33 @@
   /* === HERO === */
   .hero { padding: 100px 0 80px; position: relative; overflow: hidden; }
 
-  /* newsclips decorativos no hero */
+  /* newsclips decorativos no hero — ambient pesado, opacity baixa */
   .hero-clip {
     position: absolute;
-    width: 220px;
     pointer-events: none;
     z-index: 1;
-    opacity: 0.85;
+    mix-blend-mode: multiply;
   }
-  .hero-clip-1 { top: 40px; right: 2%; transform: rotate(7deg); }
-  .hero-clip-2 { bottom: 30px; left: -20px; width: 240px; transform: rotate(-9deg); opacity: 0.75; }
-  @media (max-width: 900px) { .hero-clip { display: none; } }
+  .hero-clip-1 { top: -60px; right: -40px; width: 380px; transform: rotate(8deg); opacity: 0.55; }
+  .hero-clip-2 { bottom: -40px; left: -60px; width: 360px; transform: rotate(-10deg); opacity: 0.45; }
+  .hero-clip-3 { top: 30%; left: 4%; width: 220px; transform: rotate(-4deg); opacity: 0.28; }
+  .hero-clip-4 { bottom: 18%; right: 6%; width: 260px; transform: rotate(6deg); opacity: 0.32; }
+  .hero-clip-5 { top: 12%; left: 40%; width: 180px; transform: rotate(-12deg); opacity: 0.22; }
+  @media (max-width: 900px) {
+    .hero-clip-3, .hero-clip-4, .hero-clip-5 { display: none; }
+    .hero-clip-1 { width: 240px; opacity: 0.4; }
+    .hero-clip-2 { width: 220px; opacity: 0.35; }
+  }
+
+  /* Newsclips ambient genericos pra outras secoes */
+  .paper-deco {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: multiply;
+    opacity: 0.3;
+  }
+  @media (max-width: 900px) { .paper-deco { display: none; } }
 
   .hero-content { position: relative; text-align: center; z-index: 3; }
 
@@ -366,39 +382,57 @@
     display: inline-block;
   }
 
-  /* SEÇÕES ALTERNADAS — papel mais escuro com bordas RASGADAS orgânicas via SVG
+  /* SEÇÕES ALTERNADAS , papel mais escuro com bordas RASGADAS orgânicas via SVG
      (curvas Bezier suaves simulam rasgo de papel real, não zigzag triangular geométrico) */
+  /* Bordas RASGADAS — path jagged (mais bicos curtos, perfil de papel rasgado real) */
   .paper-2 {
     background: var(--bg-2);
     position: relative;
-    padding-top: 150px;
-    padding-bottom: 150px;
-    margin-top: -40px;
-    margin-bottom: -40px;
+    padding-top: 170px;
+    padding-bottom: 170px;
+    margin-top: -90px;
+    margin-bottom: -90px;
   }
   .paper-2::before, .paper-2::after {
     content: '';
     position: absolute;
     left: -2px;
     right: -2px;
-    height: 80px;
+    height: 110px;
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 80' preserveAspectRatio='none'%3E%3Cpath fill='%23F2EEE2' d='M 0,0 L 0,42 C 38,22 75,55 118,38 C 165,18 205,52 252,40 C 302,28 342,16 392,38 C 442,55 478,30 528,42 C 580,55 618,28 668,40 C 720,52 758,22 808,38 C 858,52 898,28 948,42 C 998,55 1038,32 1088,40 C 1138,48 1170,30 1200,28 L 1200,0 Z'/%3E%3C/svg%3E");
     pointer-events: none;
     z-index: 3;
   }
-  .paper-2::before { top: -1px; }
-  .paper-2::after { bottom: -1px; transform: scaleY(-1); }
-  /* Conteúdo da .paper-2 fica acima dos rasgos */
+  .paper-2::before { top: -1px; background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201200%20110'%20preserveAspectRatio='none'%3E%3Cpath%20fill='%23F2EEE2'%20d='M%200,0%20L%200,82%20Q%2010,64%2020,37%20Q%2036,30%2050,21%20L%2063,22%20L%2089,27%20L%20112,41%20L%20124,47%20L%20160,41%20Q%20175,36%20190,41%20L%20218,24%20L%20235,37%20L%20254,57%20L%20267,43%20Q%20286,39%20303,46%20L%20331,22%20L%20352,26%20L%20380,53%20Q%20393,45%20405,38%20L%20439,27%20L%20463,27%20Q%20480,39%20498,56%20L%20510,84%20Q%20524,63%20535,42%20L%20554,25%20L%20567,35%20L%20601,22%20Q%20611,46%20624,65%20Q%20643,46%20658,31%20L%20694,34%20L%20723,48%20Q%20729,50%20735,42%20L%20760,49%20L%20771,61%20L%20801,32%20L%20837,34%20L%20868,23%20L%20889,29%20Q%20904,37%20914,52%20L%20928,85%20L%20950,32%20Q%20954,28%20962,24%20Q%20979,34%20989,37%20L%201025,51%20L%201043,77%20L%201074,24%20L%201088,40%20Q%201098,41%201105,45%20Q%201114,30%201130,24%20L%201148,38%20L%201171,92%20L%201191,90%20Q%201196,62%201200,46%20L%201200,0%20Z'/%3E%3C/svg%3E"); }
+  .paper-2::after  { bottom: -1px; background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201200%20110'%20preserveAspectRatio='none'%3E%3Cpath%20fill='%23F2EEE2'%20d='M%200,0%20L%200,25%20Q%207,24%2018,24%20L%2048,45%20Q%2057,35%2065,26%20L%2079,33%20L%20112,59%20L%20126,74%20L%20136,78%20L%20148,33%20L%20184,48%20Q%20192,49%20198,55%20L%20219,33%20Q%20235,28%20253,33%20L%20284,23%20Q%20296,39%20314,65%20L%20335,92%20L%20365,63%20L%20389,34%20L%20403,26%20L%20430,28%20L%20445,28%20L%20466,88%20L%20488,58%20L%20513,92%20L%20530,33%20L%20551,54%20L%20581,33%20L%20603,35%20Q%20605,40%20614,54%20Q%20633,48%20649,33%20Q%20667,59%20679,81%20L%20712,60%20Q%20717,39%20728,24%20Q%20735,40%20749,63%20Q%20763,45%20781,21%20Q%20791,30%20806,41%20L%20834,58%20L%20855,26%20L%20875,57%20L%20890,75%20Q%20899,54%20903,37%20L%20915,21%20L%20950,60%20L%20974,24%20L%20986,29%20L%201005,62%20Q%201011,68%201023,86%20L%201035,71%20L%201056,24%20L%201066,57%20L%201091,47%20L%201117,21%20L%201148,25%20Q%201160,31%201170,33%20Q%201181,35%201200,46%20L%201200,0%20Z'/%3E%3C/svg%3E"); }
   .paper-2 > * { position: relative; z-index: 4; }
 
+  /* Bridge: seçao default entre duas .paper-2 ganha rasgos invertidos pra emendar */
+  .tear-bridge { position: relative; padding-top: 130px; padding-bottom: 130px; }
+  .tear-bridge::before, .tear-bridge::after {
+    content: '';
+    position: absolute;
+    left: -2px;
+    right: -2px;
+    height: 110px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    pointer-events: none;
+    z-index: 3;
+  }
+  .tear-bridge::before { top: -1px; background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201200%20110'%20preserveAspectRatio='none'%3E%3Cpath%20fill='%23E5DFD0'%20d='M%200,0%20L%200,82%20Q%2010,64%2020,37%20Q%2036,30%2050,21%20L%2063,22%20L%2089,27%20L%20112,41%20L%20124,47%20L%20160,41%20Q%20175,36%20190,41%20L%20218,24%20L%20235,37%20L%20254,57%20L%20267,43%20Q%20286,39%20303,46%20L%20331,22%20L%20352,26%20L%20380,53%20Q%20393,45%20405,38%20L%20439,27%20L%20463,27%20Q%20480,39%20498,56%20L%20510,84%20Q%20524,63%20535,42%20L%20554,25%20L%20567,35%20L%20601,22%20Q%20611,46%20624,65%20Q%20643,46%20658,31%20L%20694,34%20L%20723,48%20Q%20729,50%20735,42%20L%20760,49%20L%20771,61%20L%20801,32%20L%20837,34%20L%20868,23%20L%20889,29%20Q%20904,37%20914,52%20L%20928,85%20L%20950,32%20Q%20954,28%20962,24%20Q%20979,34%20989,37%20L%201025,51%20L%201043,77%20L%201074,24%20L%201088,40%20Q%201098,41%201105,45%20Q%201114,30%201130,24%20L%201148,38%20L%201171,92%20L%201191,90%20Q%201196,62%201200,46%20L%201200,0%20Z'/%3E%3C/svg%3E"); transform: scaleY(-1); }
+  .tear-bridge::after  { bottom: -1px; background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201200%20110'%20preserveAspectRatio='none'%3E%3Cpath%20fill='%23E5DFD0'%20d='M%200,0%20L%200,25%20Q%207,24%2018,24%20L%2048,45%20Q%2057,35%2065,26%20L%2079,33%20L%20112,59%20L%20126,74%20L%20136,78%20L%20148,33%20L%20184,48%20Q%20192,49%20198,55%20L%20219,33%20Q%20235,28%20253,33%20L%20284,23%20Q%20296,39%20314,65%20L%20335,92%20L%20365,63%20L%20389,34%20L%20403,26%20L%20430,28%20L%20445,28%20L%20466,88%20L%20488,58%20L%20513,92%20L%20530,33%20L%20551,54%20L%20581,33%20L%20603,35%20Q%20605,40%20614,54%20Q%20633,48%20649,33%20Q%20667,59%20679,81%20L%20712,60%20Q%20717,39%20728,24%20Q%20735,40%20749,63%20Q%20763,45%20781,21%20Q%20791,30%20806,41%20L%20834,58%20L%20855,26%20L%20875,57%20L%20890,75%20Q%20899,54%20903,37%20L%20915,21%20L%20950,60%20L%20974,24%20L%20986,29%20L%201005,62%20Q%201011,68%201023,86%20L%201035,71%20L%201056,24%20L%201066,57%20L%201091,47%20L%201117,21%20L%201148,25%20Q%201160,31%201170,33%20Q%201181,35%201200,46%20L%201200,0%20Z'/%3E%3C/svg%3E"); transform: scaleY(-1); }
+  .tear-bridge > * { position: relative; z-index: 4; }
+
   @media (max-width: 700px) {
-    .paper-2 { padding-top: 110px; padding-bottom: 110px; }
-    .paper-2::before, .paper-2::after { height: 50px; }
+    .paper-2 { padding-top: 120px; padding-bottom: 120px; margin-top: -60px; margin-bottom: -60px; }
+    .paper-2::before, .paper-2::after { height: 72px; }
+    .tear-bridge { padding-top: 90px; padding-bottom: 90px; }
+    .tear-bridge::before, .tear-bridge::after { height: 72px; }
   }
 
-  /* === RECORTE de jornal — bordas ORGÂNICAS via SVG path Bezier (não polygon triangular) ===
+  /* === RECORTE de jornal , bordas ORGÂNICAS via SVG path Bezier (não polygon triangular) ===
      Estratégia: mask aplicada apenas no ::before (que pinta o background do card).
      O conteúdo fica intocado, drop-shadow no parent acompanha a forma da máscara. */
   .clip {
@@ -539,7 +573,18 @@
   }
 
   /* === VEÍCULOS === */
+  /* sticky-stack desktop: cada card empilha em cima do anterior conforme scroll */
   .veiculos-list { display: grid; gap: 28px; margin-bottom: 56px; position: relative; }
+  @media (min-width: 900px) {
+    .veiculos-list { gap: 0; padding-bottom: 40vh; }
+    .veiculos-list .veiculo {
+      position: sticky;
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .veiculos-list .veiculo:nth-child(1) { top: 96px; z-index: 1; }
+    .veiculos-list .veiculo:nth-child(2) { top: 124px; z-index: 2; margin-top: 80px; }
+    .veiculos-list .veiculo:nth-child(3) { top: 152px; z-index: 3; margin-top: 80px; }
+  }
   .veiculo {
     background: transparent;
     padding: 32px 36px;
@@ -993,8 +1038,21 @@
   }
   .agora-box p.destaque .red { color: var(--accent); }
 
-  /* === STACK === */
+  /* === STACK === sticky-stack desktop: cards do "plug and play" empilham conforme scroll */
   .stack-list { display: grid; gap: 16px; max-width: 780px; margin: 0 auto 56px; }
+  @media (min-width: 900px) {
+    .stack-list { gap: 0; padding-bottom: 40vh; }
+    .stack-list .stack-item {
+      position: sticky;
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .stack-list .stack-item:nth-child(1) { top: 96px; z-index: 1; }
+    .stack-list .stack-item:nth-child(2) { top: 116px; z-index: 2; margin-top: 40px; }
+    .stack-list .stack-item:nth-child(3) { top: 136px; z-index: 3; margin-top: 40px; }
+    .stack-list .stack-item:nth-child(4) { top: 156px; z-index: 4; margin-top: 40px; }
+    .stack-list .stack-item:nth-child(5) { top: 176px; z-index: 5; margin-top: 40px; }
+    .stack-list .stack-item:nth-child(6) { top: 196px; z-index: 6; margin-top: 40px; }
+  }
   .stack-item {
     background: transparent;
     padding: 26px 32px;
@@ -1349,11 +1407,10 @@
 <section class="hero">
   <img class="hero-clip hero-clip-1" src="assets/journal/newsclip-3.png" alt="">
   <img class="hero-clip hero-clip-2" src="assets/journal/newsclip-5.png" alt="">
+  <img class="hero-clip hero-clip-3" src="assets/journal/newsclip-6.png" alt="">
+  <img class="hero-clip hero-clip-4" src="assets/journal/newsclip-8.png" alt="">
+  <img class="hero-clip hero-clip-5" src="assets/journal/newsclip-7.png" alt="">
   <div class="container hero-content">
-    <div class="hero-tag rv">
-      <span class="dot"></span>
-      Marketing jurídico de verdade
-    </div>
     <h1 class="rv">O sistema que faz quem procura advogado <span class="red">encontrar, escolher e fechar</span> com você. Antes de chegar no concorrente.</h1>
     <p class="hero-sub rv">Em 30 dias, dentro do código de ética, sem virar refém de indicação nem precisar gravar vídeo. As <strong>3 etapas do Protocolo 3C</strong> instaladas e rodando no seu escritório.</p>
 
@@ -1384,9 +1441,9 @@
 
 <!-- DOR -->
 <section class="paper-2">
+  <img class="paper-deco" style="top: 60px; right: -40px; width: 300px; transform: rotate(7deg); opacity: 0.22;" src="assets/journal/newsclip-2.png" alt="">
   <div class="container">
     <div class="rv" style="text-align: center; margin-bottom: 72px;">
-      <span class="section-pre">Edição #01 · Diagnóstico</span>
       <h2>Se você é advogado, um desses <span class="red">4 está acontecendo agora.</span></h2>
     </div>
 
@@ -1412,29 +1469,22 @@
 </section>
 
 <!-- CASES -->
-<section>
+<section class="tear-bridge">
   <div class="container">
     <div class="rv" style="text-align: center; margin-bottom: 72px;">
-      <span class="section-pre">Coluna de cases</span>
       <h2>Resultados <span class="red">de quem aplicou.</span></h2>
     </div>
 
     <div class="cases-grid">
       <div class="clip clip-rot-2 case-card rv">
-        <div class="case-stamp">Caso<br>01</div>
-        <span class="case-area">Família · Uberlândia</span>
         <div class="case-result">De R$ 30k para <span class="red">R$ 95k</span> em 4 meses</div>
         <p class="case-quote">O Google Ads foi só uma das três etapas. Sem fluxo de atendimento e sem script, eu ia faturar mais e atender pior.</p>
       </div>
       <div class="clip clip-rot-3 case-card rv">
-        <div class="case-stamp">Caso<br>02</div>
-        <span class="case-area">Previdenciário · Capital</span>
         <div class="case-result">Custo por contato caiu <span class="red">62%</span> em 60 dias</div>
         <p class="case-quote">Eu não tinha noção de quanto perdia no atendimento. O processo mudou tudo.</p>
       </div>
       <div class="clip clip-rot-1 case-card rv">
-        <div class="case-stamp">Caso<br>03</div>
-        <span class="case-area">Trabalhista · Interior</span>
         <div class="case-result">3 associados contratados <span class="red">em 8 meses</span></div>
         <p class="case-quote">Sai da operação. Hoje pilotando o escritório, não correndo atrás dele.</p>
       </div>
@@ -1444,9 +1494,9 @@
 
 <!-- VEÍCULOS ANTIGOS + INIMIGO -->
 <section class="paper-2">
+  <img class="paper-deco" style="bottom: 80px; left: -50px; width: 280px; transform: rotate(-6deg); opacity: 0.2;" src="assets/journal/newsclip-8.png" alt="">
   <div class="container-sm">
     <div class="rv" style="margin-bottom: 56px;">
-      <span class="section-pre">O que ninguém te conta</span>
       <h2>Você já tentou. <span class="red">Não foi culpa sua.</span></h2>
       <p class="lead">Cada caminho abaixo resolve <strong>UMA peça</strong>. Nenhum deles resolve o sistema. E sem sistema, peça nova vira só mais um custo.</p>
     </div>
@@ -1495,7 +1545,6 @@
     <img class="jornal-deco jornal-deco-3" src="assets/journal/newsclip-7.png" alt="">
 
     <div class="jornal-content">
-      <div class="jornal-pretitle">Edição extraordinária</div>
       <h2 class="jornal-manchete">Essa é <span class="red">a única</span> forma</h2>
       <p class="jornal-subtitulo">de ter um escritório com <strong>caixa previsível</strong> sem depender de indicação nem virar influencer. É exatamente isso que o <strong>Protocolo 3C</strong> entrega.</p>
     </div>
@@ -1503,17 +1552,15 @@
 </section>
 
 <!-- PROTOCOLO 3C -->
-<section>
+<section class="tear-bridge">
   <div class="container">
     <div class="protocolo-intro rv">
-      <span class="section-pre">Manual de instalação</span>
       <h2>O <span class="red">Protocolo 3C.</span></h2>
       <p class="lead" style="margin: 0 auto;">Três etapas plugadas, rodando todos os dias no seu escritório. Você não compra anúncio avulso. Você instala um <strong>sistema completo</strong> de Captação, Conversão e Crescimento.</p>
     </div>
 
     <div class="etapas-flow">
       <div class="clip clip-rot-3 etapa rv">
-        <span class="etapa-badge">Etapa 1</span>
         <h3>Captação<span class="red">.</span></h3>
         <p class="resolve">Resolve: depender de indicação</p>
         <p>Seu escritório está na frente de quem já está procurando advogado, no <strong>momento exato da decisão</strong>. Quem busca te encontra primeiro.</p>
@@ -1527,7 +1574,6 @@
       <div class="arrow">→</div>
 
       <div class="clip clip-rot-2 etapa rv">
-        <span class="etapa-badge">Etapa 2</span>
         <h3>Conversão<span class="red">.</span></h3>
         <p class="resolve">Resolve: perder o contato no atendimento</p>
         <p>Só <strong>pessoa séria</strong> chega no seu WhatsApp, e quando chega, já vem pronta pra virar contrato. Você atende menos e fecha mais.</p>
@@ -1541,7 +1587,6 @@
       <div class="arrow">→</div>
 
       <div class="clip clip-rot-1 etapa rv">
-        <span class="etapa-badge">Etapa 3</span>
         <h3>Crescimento<span class="red">.</span></h3>
         <p class="resolve">Resolve: faturar mais sem se sobrecarregar mais</p>
         <p>Cada contrato fechado vira <strong>combustível pro próximo</strong>. Sistema rodando todo dia, evoluindo todo mês, virando ativo do escritório.</p>
@@ -1562,9 +1607,9 @@
 
 <!-- DIFERENCIAL -->
 <section class="paper-2">
+  <img class="paper-deco" style="top: 50%; right: 3%; width: 220px; transform: rotate(-9deg) translateY(-40%); opacity: 0.18;" src="assets/journal/newsclip-4.png" alt="">
   <div class="container-sm">
     <div class="rv" style="text-align: center; margin-bottom: 56px;">
-      <span class="section-pre">Comparativo</span>
       <h2>Por que isso é diferente <span class="red">do que você já viu.</span></h2>
     </div>
 
@@ -1595,10 +1640,9 @@
 
 <!-- POR QUE AGORA -->
 <section class="agora">
+  <img class="paper-deco" style="top: 80px; left: -30px; width: 260px; transform: rotate(8deg); opacity: 0.2;" src="assets/journal/newsclip-5.png" alt="">
   <div class="container-sm">
     <div class="agora-box rv">
-      <div class="stamp-urgent">Urgente</div>
-      <span class="agora-tag">Por que esperar custa caro</span>
       <h2>A vaga do primeiro lugar <span class="red">é uma só.</span></h2>
       <p>Cada mês que passa, mais escritórios da sua cidade estão instalando sistema. Quem busca advogado na sua área <strong>hoje encontra eles, não você</strong>.</p>
       <p><strong>O Google não mostra dois primeiros lugares.</strong> Existe UM primeiro. E enquanto você adia a decisão, alguém na sua região ocupa essa vaga.</p>
@@ -1610,9 +1654,9 @@
 
 <!-- STACK -->
 <section class="paper-2">
+  <img class="paper-deco" style="top: 100px; left: 5%; width: 240px; transform: rotate(4deg); opacity: 0.2;" src="assets/journal/newsclip-6.png" alt="">
   <div class="container-sm">
     <div class="rv" style="text-align: center; margin-bottom: 64px;">
-      <span class="section-pre">O que está incluso</span>
       <h2>Plug and play. <span class="red">Você só precisa atender.</span></h2>
       <p class="lead" style="margin: 0 auto;">Peças instaladas e rodando no seu escritório em até 30 dias. Sem você ter que aprender ferramenta nova, sem gravar vídeo, sem virar marqueteiro.</p>
     </div>
@@ -1672,10 +1716,9 @@
 </section>
 
 <!-- MATHEUS -->
-<section>
+<section class="tear-bridge">
   <div class="container">
     <div class="rv" style="margin-bottom: 56px;">
-      <span class="section-pre">Editorial</span>
       <h2>Quem é o <span class="red">Matheus.</span></h2>
     </div>
 
@@ -1684,7 +1727,6 @@
         <div class="matheus-img">
           <img src="assets/matheus.png" alt="Matheus Esteves">
         </div>
-        <div class="matheus-tag">Exclusivo</div>
         <img class="matheus-img-clip" src="assets/journal/newsclip-6.png" alt="">
       </div>
       <div class="matheus-bio rv">
@@ -1713,9 +1755,9 @@
 
 <!-- COMO FUNCIONA -->
 <section class="paper-2">
+  <img class="paper-deco" style="bottom: 60px; right: 6%; width: 260px; transform: rotate(-7deg); opacity: 0.22;" src="assets/journal/newsclip-3.png" alt="">
   <div class="container-sm">
     <div class="rv" style="margin-bottom: 64px;">
-      <span class="section-pre">Próximos passos</span>
       <h2>O que acontece depois que <span class="red">você clica no botão.</span></h2>
     </div>
 
@@ -1745,10 +1787,9 @@
 </section>
 
 <!-- FAQ -->
-<section>
+<section class="tear-bridge">
   <div class="container-sm">
     <div class="rv" style="text-align: center; margin-bottom: 64px;">
-      <span class="section-pre">FAQ</span>
       <h2>Antes de você <span class="red">perguntar.</span></h2>
     </div>
 
