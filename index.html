@@ -1,0 +1,1842 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Protocolo 3C · Sistema completo de marketing jurídico</title>
+<meta name="description" content="Protocolo 3C: Captação + Conversão + Crescimento. O sistema instalado no seu escritório de advocacia em 30 dias, dentro do código de ética, sem virar refém de indicação.">
+<meta name="theme-color" content="#F2EEE2">
+<meta property="og:title" content="Protocolo 3C · Matheus">
+<meta property="og:description" content="O sistema que faz quem procura advogado encontrar, escolher e fechar com você. Antes de chegar no concorrente.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    /* PAPEL */
+    --bg: #F2EEE2;          /* papel cremoso base */
+    --bg-2: #EAE3D0;        /* papel um pouco mais escuro */
+    --bg-3: #F8F3E5;        /* papel mais claro (recortes) */
+    --bg-card: #FBF7EA;     /* recorte "mais novo" */
+
+    /* TINTA */
+    --ink: #04151F;         /* preto-azulado, tinta de jornal */
+    --ink-2: #3D4A5A;       /* secundário */
+    --ink-3: #6F7B87;       /* terciário */
+    --ink-line: rgba(4, 21, 31, 0.12);
+    --ink-line-strong: rgba(4, 21, 31, 0.25);
+
+    /* CANETA / DESTAQUE */
+    --accent: #FF001A;
+    --accent-soft: #D90017;
+    --accent-dim: rgba(255, 0, 26, 0.10);
+    --accent-mark: rgba(255, 0, 26, 0.18);
+
+    --bordeaux: #5C1A1B;
+    --bordeaux-light: #7A2526;
+
+    --shadow-clip: 0 1px 2px rgba(74, 47, 12, 0.12), 0 6px 18px rgba(74, 47, 12, 0.08), 0 24px 50px rgba(74, 47, 12, 0.10);
+    --shadow-clip-hover: 0 2px 6px rgba(74, 47, 12, 0.14), 0 12px 28px rgba(74, 47, 12, 0.14), 0 36px 80px rgba(74, 47, 12, 0.18);
+
+    /* máscara SVG de "recorte de papel" — bordas Bezier orgânicas */
+    --tear-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 600' preserveAspectRatio='none'%3E%3Cpath fill='black' d='M 5,12 C 60,4 110,18 165,10 C 220,4 268,18 325,10 C 380,4 430,18 488,8 C 545,2 595,16 650,10 C 705,4 755,18 810,10 C 865,4 915,18 970,8 C 985,6 992,10 996,14 L 996,586 C 950,594 905,578 850,588 C 795,596 745,580 690,590 C 635,594 580,582 525,590 C 470,594 420,578 365,588 C 310,596 260,580 205,590 C 150,594 100,582 55,588 C 30,590 12,588 5,584 Z'/%3E%3C/svg%3E");
+  }
+
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Poppins', -apple-system, sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* TEXTURA DE PAPEL GLOBAL: manchas + granulado */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(circle 380px at 10% 18%, rgba(74, 47, 12, 0.06) 0%, transparent 60%),
+      radial-gradient(circle 320px at 82% 38%, rgba(74, 47, 12, 0.05) 0%, transparent 60%),
+      radial-gradient(circle 400px at 24% 72%, rgba(74, 47, 12, 0.04) 0%, transparent 60%),
+      radial-gradient(circle 280px at 68% 88%, rgba(74, 47, 12, 0.05) 0%, transparent 60%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' seed='6'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.10 0'/></filter><rect width='400' height='400' filter='url(%23n)'/></svg>");
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  nav, section, footer { position: relative; z-index: 2; }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  .container-sm { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+  /* === NAV === */
+  nav {
+    position: sticky;
+    top: 0;
+    background: rgba(242, 238, 226, 0.92);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    border-bottom: 1px solid var(--ink-line);
+    z-index: 100;
+    padding: 14px 0;
+  }
+  nav .container { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .logo {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(16px, 1.6vw, 20px);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .logo span { color: var(--accent); }
+  .nav-cta {
+    background: var(--accent);
+    color: #FFF;
+    padding: 10px 18px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: clamp(11px, 1vw, 13px);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    transition: transform 0.2s, background 0.2s, box-shadow 0.3s;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+  .nav-cta:hover { transform: translateY(-1px); background: var(--accent-soft); box-shadow: 0 10px 28px rgba(255, 0, 26, 0.28); }
+  /* texto adaptativo no CTA do nav: longo em desktop, curto em mobile */
+  .nav-cta-full { display: inline; }
+  .nav-cta-short { display: none; }
+  @media (max-width: 480px) {
+    .nav-cta { padding: 9px 14px; font-size: 11px; }
+    .nav-cta-full { display: none; }
+    .nav-cta-short { display: inline; }
+  }
+
+  /* === BRUSH HIGHLIGHTS (caneta de leitor) === */
+
+  /* circulado: SVG inline com elipse irregular */
+  .circled {
+    position: relative;
+    display: inline-block;
+    padding: 0 8px;
+    color: var(--ink);
+    z-index: 1;
+  }
+  .circled::before {
+    content: '';
+    position: absolute;
+    inset: -8px -4px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 80' fill='none' stroke='%23FF001A' stroke-width='3' stroke-linecap='round'><path d='M 30 40 C 20 20 50 8 100 6 C 160 4 195 22 192 42 C 188 64 150 76 100 74 C 50 72 18 60 22 40 C 26 22 60 12 100 12'/></svg>");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  /* sublinhado de caneta */
+  .underlined {
+    position: relative;
+    display: inline-block;
+    color: var(--ink);
+  }
+  .underlined::after {
+    content: '';
+    position: absolute;
+    left: -4px;
+    right: -4px;
+    bottom: -6px;
+    height: 12px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 16' fill='none' stroke='%23FF001A' stroke-width='3' stroke-linecap='round'><path d='M 4 10 C 30 6 60 12 90 8 C 120 4 150 12 196 8'/></svg>");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    pointer-events: none;
+  }
+
+  /* risco (strike) de caneta */
+  .struck {
+    position: relative;
+    display: inline-block;
+    color: var(--ink-2);
+  }
+  .struck::after {
+    content: '';
+    position: absolute;
+    left: -6px;
+    right: -6px;
+    top: 48%;
+    height: 8px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 8' fill='none' stroke='%23FF001A' stroke-width='2.5' stroke-linecap='round'><path d='M 2 5 C 30 2 60 7 100 4 C 140 1 170 6 198 3'/></svg>");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    pointer-events: none;
+  }
+
+  /* marcador (highlight amarelo de caneta) — variante */
+  .marked {
+    background: linear-gradient(180deg, transparent 60%, var(--accent-mark) 60%, var(--accent-mark) 92%, transparent 92%);
+    padding: 0 4px;
+  }
+
+  /* === HERO === */
+  .hero { padding: 100px 0 80px; position: relative; overflow: hidden; }
+
+  /* newsclips decorativos no hero */
+  .hero-clip {
+    position: absolute;
+    width: 220px;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.85;
+  }
+  .hero-clip-1 { top: 40px; right: 2%; transform: rotate(7deg); }
+  .hero-clip-2 { bottom: 30px; left: -20px; width: 240px; transform: rotate(-9deg); opacity: 0.75; }
+  @media (max-width: 900px) { .hero-clip { display: none; } }
+
+  .hero-content { position: relative; text-align: center; z-index: 3; }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: 1.5px solid var(--ink);
+    color: var(--ink);
+    padding: 7px 16px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    border-radius: 2px;
+  }
+  .hero-tag .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 12px var(--accent);
+    animation: blink 2s ease-in-out infinite;
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  h1 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(34px, 5.4vw, 72px);
+    font-weight: 400;
+    line-height: 1.0;
+    letter-spacing: -0.005em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    max-width: 920px;
+    margin-left: auto;
+    margin-right: auto;
+    color: var(--ink);
+  }
+  h1 .red { color: var(--accent); }
+  h1 .underlined-red {
+    color: var(--accent);
+    position: relative;
+    display: inline-block;
+  }
+  /* sublinhado de caneta vermelho aplicado linha-a-linha (funciona em multi-linha) */
+  h1 .underlined-red {
+    background-image: linear-gradient(transparent calc(100% - 0.12em), var(--accent) calc(100% - 0.12em), var(--accent) calc(100% - 0.04em), transparent calc(100% - 0.04em));
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(17px, 1.6vw, 20px);
+    color: var(--ink-2);
+    max-width: 720px;
+    margin: 0 auto 40px;
+    line-height: 1.55;
+    font-weight: 400;
+  }
+  .hero-sub strong { font-weight: 600; color: var(--ink); }
+
+  .hero-checks {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 28px;
+    margin-bottom: 48px;
+  }
+  .hero-check {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--ink-2);
+    font-weight: 500;
+  }
+  .hero-check svg { color: var(--accent); flex-shrink: 0; }
+
+  .cta-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: var(--accent);
+    color: #FFF;
+    padding: 17px 32px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: clamp(13px, 1.1vw, 14px);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-radius: 2px;
+    transition: transform 0.2s, box-shadow 0.3s, background 0.2s;
+    box-shadow: 0 14px 36px rgba(255, 0, 26, 0.22);
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  @media (max-width: 480px) {
+    .cta-primary { padding: 15px 22px; font-size: 12px; letter-spacing: 0.06em; gap: 8px; white-space: normal; text-align: center; }
+  }
+  .cta-primary::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+    transition: left 0.6s;
+  }
+  .cta-primary:hover::after { left: 100%; }
+  .cta-primary:hover { transform: translateY(-2px); background: var(--accent-soft); box-shadow: 0 24px 56px rgba(255, 0, 26, 0.30); }
+  .cta-primary svg { transition: transform 0.2s; }
+  .cta-primary:hover svg { transform: translateX(4px); }
+
+  .cta-micro { margin-top: 18px; font-size: 13px; color: var(--ink-3); font-weight: 400; }
+
+  /* === SECTIONS === */
+  section { padding: 100px 0; scroll-margin-top: 80px; }
+  h2 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(30px, 4.2vw, 54px);
+    font-weight: 400;
+    line-height: 1.02;
+    letter-spacing: -0.005em;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+    color: var(--ink);
+  }
+  h2 .red { color: var(--accent); }
+
+  .lead {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    color: var(--ink-2);
+    max-width: 680px;
+    margin-bottom: 64px;
+    line-height: 1.6;
+    font-weight: 400;
+  }
+  .lead strong { font-weight: 600; color: var(--ink); }
+
+  .section-pre {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 15px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--bordeaux);
+    margin-bottom: 14px;
+    display: inline-block;
+  }
+
+  /* SEÇÕES ALTERNADAS — papel mais escuro com bordas RASGADAS orgânicas via SVG
+     (curvas Bezier suaves simulam rasgo de papel real, não zigzag triangular geométrico) */
+  .paper-2 {
+    background: var(--bg-2);
+    position: relative;
+    padding-top: 150px;
+    padding-bottom: 150px;
+    margin-top: -40px;
+    margin-bottom: -40px;
+  }
+  .paper-2::before, .paper-2::after {
+    content: '';
+    position: absolute;
+    left: -2px;
+    right: -2px;
+    height: 80px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 80' preserveAspectRatio='none'%3E%3Cpath fill='%23F2EEE2' d='M 0,0 L 0,42 C 38,22 75,55 118,38 C 165,18 205,52 252,40 C 302,28 342,16 392,38 C 442,55 478,30 528,42 C 580,55 618,28 668,40 C 720,52 758,22 808,38 C 858,52 898,28 948,42 C 998,55 1038,32 1088,40 C 1138,48 1170,30 1200,28 L 1200,0 Z'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 3;
+  }
+  .paper-2::before { top: -1px; }
+  .paper-2::after { bottom: -1px; transform: scaleY(-1); }
+  /* Conteúdo da .paper-2 fica acima dos rasgos */
+  .paper-2 > * { position: relative; z-index: 4; }
+
+  @media (max-width: 700px) {
+    .paper-2 { padding-top: 110px; padding-bottom: 110px; }
+    .paper-2::before, .paper-2::after { height: 50px; }
+  }
+
+  /* === RECORTE de jornal — bordas ORGÂNICAS via SVG path Bezier (não polygon triangular) ===
+     Estratégia: mask aplicada apenas no ::before (que pinta o background do card).
+     O conteúdo fica intocado, drop-shadow no parent acompanha a forma da máscara. */
+  .clip {
+    background: transparent;
+    padding: 36px 32px;
+    position: relative;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s;
+    /* drop-shadow segue a forma da máscara do filho */
+    filter:
+      drop-shadow(0 1px 2px rgba(74, 47, 12, 0.14))
+      drop-shadow(0 6px 14px rgba(74, 47, 12, 0.10))
+      drop-shadow(0 24px 36px rgba(74, 47, 12, 0.08));
+  }
+  /* ::before = a "folha de papel" (background mascarado) */
+  .clip::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--bg-card);
+    background-image:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='2' seed='3'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0'/></filter><rect width='400' height='400' filter='url(%23n)'/></svg>"),
+      radial-gradient(ellipse at 80% 100%, rgba(74, 47, 12, 0.10), transparent 60%),
+      linear-gradient(var(--bg-card), var(--bg-card));
+    -webkit-mask-image: var(--tear-mask);
+    mask-image: var(--tear-mask);
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    z-index: 0;
+  }
+  /* conteúdo do card fica por cima do ::before */
+  .clip > * { position: relative; z-index: 2; }
+
+  /* rotações leves naturais */
+  .clip-rot-1 { transform: rotate(-1.2deg); }
+  .clip-rot-2 { transform: rotate(0.8deg); }
+  .clip-rot-3 { transform: rotate(-0.6deg); }
+  .clip-rot-4 { transform: rotate(1.4deg); }
+  .clip-rot-5 { transform: rotate(-1.8deg); }
+  .clip-rot-6 { transform: rotate(1deg); }
+
+  .clip:hover { transform: rotate(0) translateY(-6px); box-shadow: var(--shadow-clip-hover); z-index: 5; }
+
+  /* === DOR === */
+  .dor-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 36px 28px;
+  }
+  .dor-card .dor-num {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(44px, 4.5vw, 60px);
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 12px;
+    letter-spacing: -0.015em;
+  }
+  .dor-card p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    color: var(--ink);
+    line-height: 1.5;
+    font-weight: 400;
+  }
+  .dor-card p strong { font-weight: 700; }
+
+  /* === CASES === */
+  .cases-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 36px 28px; }
+  .case-card .case-area {
+    display: inline-block;
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--accent);
+    margin-bottom: 18px;
+  }
+  .case-card .case-result {
+    font-family: 'Anton', sans-serif;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 1.05;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+    letter-spacing: -0.005em;
+    color: var(--ink);
+  }
+  .case-card .case-result .red { color: var(--accent); }
+  .case-quote {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--ink-2);
+    line-height: 1.65;
+    padding-top: 18px;
+    border-top: 1px solid var(--ink-line);
+    position: relative;
+  }
+  .case-quote::before {
+    content: '"';
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 56px;
+    color: var(--accent);
+    position: absolute;
+    top: -16px;
+    left: -8px;
+    line-height: 1;
+    opacity: 0.5;
+  }
+
+  /* selo carimbado nos cases */
+  .case-stamp {
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    width: 60px;
+    height: 60px;
+    border: 2.5px solid var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    font-family: 'Anton', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    text-align: center;
+    line-height: 1.1;
+    text-transform: uppercase;
+    transform: rotate(-12deg);
+    opacity: 0.9;
+    z-index: 2;
+  }
+
+  /* === VEÍCULOS === */
+  .veiculos-list { display: grid; gap: 28px; margin-bottom: 56px; position: relative; }
+  .veiculo {
+    background: transparent;
+    padding: 32px 36px;
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 32px;
+    align-items: start;
+    position: relative;
+    transition: transform 0.3s, filter 0.3s;
+    filter:
+      drop-shadow(0 1px 2px rgba(74, 47, 12, 0.14))
+      drop-shadow(0 6px 14px rgba(74, 47, 12, 0.10))
+      drop-shadow(0 24px 36px rgba(74, 47, 12, 0.08));
+  }
+  .veiculo::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--bg-card);
+    background-image:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='2' seed='3'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0'/></filter><rect width='400' height='400' filter='url(%23n)'/></svg>"),
+      linear-gradient(var(--bg-card), var(--bg-card));
+    -webkit-mask-image: var(--tear-mask);
+    mask-image: var(--tear-mask);
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    z-index: 0;
+  }
+  .veiculo > * { position: relative; z-index: 2; }
+  .veiculo:hover { transform: translateY(-4px); }
+  .veiculo-num {
+    font-family: 'Anton', sans-serif;
+    font-size: 56px;
+    color: var(--accent);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .veiculo h3 {
+    font-family: 'Anton', sans-serif;
+    font-size: 28px;
+    font-weight: 400;
+    margin-bottom: 10px;
+    letter-spacing: -0.005em;
+    text-transform: uppercase;
+    line-height: 1.1;
+    color: var(--ink);
+  }
+  .veiculo h3 .red { color: var(--accent); }
+  .veiculo p {
+    font-family: 'Poppins', sans-serif;
+    color: var(--ink-2);
+    font-size: 15px;
+    line-height: 1.6;
+    font-weight: 400;
+  }
+  .veiculo p strong { font-weight: 600; color: var(--ink); }
+
+  /* === INIMIGO BOX (vermelho/bordeaux pesado, em destaque) === */
+  .inimigo-box {
+    color: #FFEEEF;
+    padding: 44px 40px;
+    margin-bottom: 56px;
+    position: relative;
+    filter:
+      drop-shadow(0 1px 2px rgba(74, 12, 12, 0.20))
+      drop-shadow(0 8px 18px rgba(74, 12, 12, 0.18))
+      drop-shadow(0 28px 50px rgba(74, 12, 12, 0.20));
+  }
+  .inimigo-box::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--bordeaux) 0%, #3D1011 100%);
+    -webkit-mask-image: var(--tear-mask);
+    mask-image: var(--tear-mask);
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    z-index: 0;
+  }
+  .inimigo-box > * { position: relative; z-index: 2; }
+  .inimigo-box .label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #FFB8BC;
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    font-weight: 700;
+    position: relative;
+  }
+  .inimigo-box .label::before {
+    content: '';
+    width: 28px;
+    height: 1.5px;
+    background: #FFB8BC;
+  }
+  .inimigo-box p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
+    color: #FFEEEF;
+    position: relative;
+    font-weight: 400;
+  }
+  .inimigo-box p strong { color: #FFFFFF; font-weight: 700; }
+
+  /* TESE DESTAQUE */
+  .tese-destaque {
+    background: var(--bg-card);
+    border: 2px solid var(--ink);
+    padding: 40px 32px;
+    text-align: center;
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(20px, 2.4vw, 30px);
+    font-weight: 400;
+    line-height: 1.18;
+    color: var(--ink);
+    text-transform: uppercase;
+    letter-spacing: -0.005em;
+    position: relative;
+    box-shadow: var(--shadow-clip);
+  }
+  .tese-destaque .red { color: var(--accent); }
+  .tese-destaque-sub {
+    display: block;
+    margin-top: 16px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: normal;
+    color: var(--ink-2);
+  }
+
+  /* === ONE BELIEF · JORNAL (mantém estilo de papel envelhecido, agora INTEGRADO no fundo papel) === */
+  .jornal-section {
+    padding: 0;
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+  }
+  .jornal-stage {
+    position: relative;
+    width: 100%;
+    min-height: 580px;
+    background-color: var(--bg-2);
+    background-image:
+      radial-gradient(circle 320px at 12% 25%, rgba(74, 47, 12, 0.10) 0%, transparent 65%),
+      radial-gradient(circle 280px at 78% 70%, rgba(74, 47, 12, 0.08) 0%, transparent 65%),
+      radial-gradient(circle 240px at 50% 50%, rgba(74, 47, 12, 0.06) 0%, transparent 65%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' seed='4'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.16 0'/></filter><rect width='400' height='400' filter='url(%23n)'/></svg>");
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 150px 24px;
+    color: var(--ink);
+  }
+  /* rasgos orgânicos no topo e fundo da .jornal-stage usando SVG path Bezier */
+  .jornal-stage::before, .jornal-stage::after {
+    content: '';
+    position: absolute;
+    left: -2px;
+    right: -2px;
+    height: 80px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 80' preserveAspectRatio='none'%3E%3Cpath fill='%23F2EEE2' d='M 0,0 L 0,38 C 42,18 82,52 128,35 C 175,18 218,48 265,38 C 312,28 348,15 398,36 C 448,52 488,28 538,42 C 588,55 626,30 676,40 C 728,52 768,22 818,38 C 868,55 906,28 956,42 C 1006,55 1042,30 1092,40 C 1142,48 1172,28 1200,26 L 1200,0 Z'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 2;
+  }
+  .jornal-stage::before { top: -1px; }
+  .jornal-stage::after { bottom: -1px; transform: scaleY(-1); }
+
+  .jornal-deco {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0.7;
+  }
+  .jornal-deco-1 { top: 40px; left: -50px; width: 280px; transform: rotate(-8deg); }
+  .jornal-deco-2 { bottom: 30px; right: -40px; width: 240px; transform: rotate(6deg); }
+  .jornal-deco-3 { top: 50%; right: 8%; width: 180px; transform: rotate(-3deg) translateY(-50%); opacity: 0.4; }
+  @media (max-width: 900px) {
+    .jornal-deco { display: none; }
+  }
+
+  .jornal-content { position: relative; text-align: center; max-width: 1100px; z-index: 3; }
+  .jornal-pretitle {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 14px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--bordeaux);
+    margin-bottom: 18px;
+  }
+  .jornal-manchete {
+    font-family: 'Anton', sans-serif;
+    font-weight: 400;
+    font-size: clamp(48px, 9vw, 160px);
+    line-height: 0.92;
+    letter-spacing: -0.005em;
+    color: var(--ink);
+    text-transform: uppercase;
+    margin: 0 0 32px 0;
+    padding: 4px 0;
+    white-space: nowrap;
+  }
+  .jornal-manchete .red { color: var(--accent); }
+  .jornal-subtitulo {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: clamp(20px, 2.2vw, 26px);
+    line-height: 1.45;
+    color: var(--ink);
+    text-align: center;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .jornal-subtitulo strong { font-weight: 700; }
+  @media (max-width: 700px) { .jornal-manchete { white-space: normal; font-size: 56px; } }
+
+  /* === PROTOCOLO 3C === */
+  .protocolo-intro { text-align: center; margin-bottom: 72px; max-width: 760px; margin-left: auto; margin-right: auto; }
+  .protocolo-intro .lead { margin: 0 auto; }
+  .etapas-flow {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    gap: 20px;
+    align-items: stretch;
+    margin-bottom: 72px;
+  }
+  .etapa { padding: 40px 32px; }
+  .etapa-badge {
+    display: inline-block;
+    background: var(--accent);
+    color: #FFF;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 10px;
+    padding: 6px 12px;
+    margin-bottom: 22px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border-radius: 2px;
+  }
+  .etapa h3 {
+    font-family: 'Anton', sans-serif;
+    font-size: 44px;
+    font-weight: 400;
+    margin-bottom: 14px;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .etapa h3 .red { color: var(--accent); }
+  .etapa .resolve {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--bordeaux);
+    margin-bottom: 16px;
+    letter-spacing: 0.02em;
+  }
+  .etapa p {
+    font-family: 'Poppins', sans-serif;
+    color: var(--ink-2);
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-weight: 400;
+  }
+  .etapa p strong { font-weight: 700; color: var(--ink); }
+  .etapa ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .etapa ul li {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: var(--ink);
+    padding-left: 22px;
+    position: relative;
+    line-height: 1.5;
+    font-weight: 500;
+  }
+  .etapa ul li::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    background: var(--accent);
+    border-radius: 50%;
+    position: absolute;
+    left: 0;
+    top: 7px;
+  }
+  .arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    font-family: 'Anton', sans-serif;
+    font-size: 36px;
+  }
+
+  /* === DIFERENCIAL === */
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    background: transparent;
+    position: relative;
+    filter:
+      drop-shadow(0 1px 2px rgba(74, 47, 12, 0.14))
+      drop-shadow(0 6px 14px rgba(74, 47, 12, 0.10))
+      drop-shadow(0 24px 36px rgba(74, 47, 12, 0.08));
+  }
+  .compare::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--bg-card);
+    -webkit-mask-image: var(--tear-mask);
+    mask-image: var(--tear-mask);
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    z-index: 0;
+  }
+  .compare > * { position: relative; z-index: 2; }
+  .compare-col { padding: 44px; position: relative; z-index: 2; }
+  .compare-col.good { background: rgba(255, 0, 26, 0.04); border-left: 1px dashed var(--ink-line-strong); }
+  .compare-title {
+    font-family: 'Anton', sans-serif;
+    font-size: 22px;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    margin-bottom: 28px;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .compare-col.good .compare-title { color: var(--accent); }
+  .compare-list { list-style: none; display: flex; flex-direction: column; gap: 18px; }
+  .compare-list li {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    font-size: 15px;
+    line-height: 1.5;
+    font-weight: 500;
+  }
+  .compare-list li svg { flex-shrink: 0; margin-top: 3px; }
+  .compare-col.bad svg { color: var(--ink-3); }
+  .compare-col.good svg { color: var(--accent); }
+  .compare-col.bad li { color: var(--ink-2); }
+  .compare-col.good li { color: var(--ink); font-weight: 600; }
+
+  /* === POR QUE AGORA === */
+  .agora { padding: 130px 0; position: relative; overflow: hidden; }
+  .agora-box {
+    max-width: 900px;
+    margin: 0 auto;
+    background: transparent;
+    padding: 64px 56px;
+    position: relative;
+    filter:
+      drop-shadow(0 1px 2px rgba(74, 47, 12, 0.14))
+      drop-shadow(0 8px 18px rgba(74, 47, 12, 0.12))
+      drop-shadow(0 28px 50px rgba(74, 47, 12, 0.10));
+  }
+  .agora-box::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--bg-card);
+    -webkit-mask-image: var(--tear-mask);
+    mask-image: var(--tear-mask);
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    z-index: 0;
+  }
+  .agora-box > * { position: relative; z-index: 2; }
+  .stamp-urgent {
+    position: absolute;
+    top: 36px;
+    right: 0;
+    transform: rotate(8deg);
+    border: 3px solid var(--accent);
+    color: var(--accent);
+    padding: 8px 18px;
+    font-family: 'Anton', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    background: rgba(255, 0, 26, 0.06);
+    opacity: 0.9;
+    z-index: 2;
+  }
+  .stamp-urgent::before {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border: 1px dashed var(--accent);
+    opacity: 0.3;
+  }
+  @media (max-width: 600px) { .stamp-urgent { font-size: 14px; padding: 6px 12px; top: 16px; right: 12px; } }
+
+  .agora-tag {
+    display: inline-block;
+    color: var(--bordeaux);
+    padding: 0;
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 16px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .agora-box h2 { margin-bottom: 32px; position: relative; }
+  .agora-box p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 17px;
+    color: var(--ink-2);
+    line-height: 1.7;
+    margin-bottom: 20px;
+    position: relative;
+    font-weight: 400;
+  }
+  .agora-box p strong { color: var(--ink); font-weight: 700; }
+  .agora-box p.destaque {
+    color: var(--ink);
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(20px, 2vw, 26px);
+    line-height: 1.15;
+    text-transform: uppercase;
+    margin-top: 32px;
+    padding-top: 32px;
+    border-top: 2px solid var(--ink);
+    font-weight: 400;
+    letter-spacing: -0.005em;
+  }
+  .agora-box p.destaque .red { color: var(--accent); }
+
+  /* === STACK === */
+  .stack-list { display: grid; gap: 16px; max-width: 780px; margin: 0 auto 56px; }
+  .stack-item {
+    background: transparent;
+    padding: 26px 32px;
+    display: grid;
+    grid-template-columns: 42px 1fr;
+    gap: 22px;
+    align-items: start;
+    position: relative;
+    transition: transform 0.2s, filter 0.2s;
+    filter:
+      drop-shadow(0 1px 2px rgba(74, 47, 12, 0.12))
+      drop-shadow(0 4px 10px rgba(74, 47, 12, 0.08));
+  }
+  .stack-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--bg-card);
+    -webkit-mask-image: var(--tear-mask);
+    mask-image: var(--tear-mask);
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    z-index: 0;
+  }
+  .stack-item > * { position: relative; z-index: 2; }
+  .stack-item:hover { transform: translateX(4px); }
+  .stack-check {
+    width: 36px;
+    height: 36px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFF;
+  }
+  .stack-item h4 {
+    font-family: 'Anton', sans-serif;
+    font-size: 22px;
+    font-weight: 400;
+    margin-bottom: 4px;
+    letter-spacing: -0.005em;
+    text-transform: uppercase;
+    color: var(--ink);
+    line-height: 1.1;
+  }
+  .stack-item p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: var(--ink-2);
+    line-height: 1.55;
+    font-weight: 400;
+  }
+  .stack-footer { text-align: center; max-width: 640px; margin: 0 auto; padding: 32px; }
+
+  /* === MATHEUS === */
+  .matheus-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 72px; align-items: center; }
+  .matheus-img-wrap { position: relative; }
+  .matheus-img {
+    width: 100%;
+    aspect-ratio: 4/5;
+    background: #DDD;
+    overflow: hidden;
+    position: relative;
+    -webkit-mask-image: var(--tear-mask);
+    mask-image: var(--tear-mask);
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    filter:
+      drop-shadow(0 1px 2px rgba(74, 47, 12, 0.14))
+      drop-shadow(0 8px 18px rgba(74, 47, 12, 0.12))
+      drop-shadow(0 28px 50px rgba(74, 47, 12, 0.10));
+  }
+  .matheus-img img { width: 100%; height: 100%; object-fit: cover; filter: contrast(1.05); }
+  /* etiqueta de jornal "EXCLUSIVO" no canto da foto */
+  .matheus-tag {
+    position: absolute;
+    bottom: -12px;
+    left: -12px;
+    background: var(--accent);
+    color: #FFF;
+    padding: 8px 16px;
+    font-family: 'Anton', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transform: rotate(-3deg);
+    box-shadow: 0 8px 24px rgba(255, 0, 26, 0.3);
+    z-index: 3;
+  }
+  .matheus-img-clip {
+    position: absolute;
+    bottom: -30px;
+    right: -30px;
+    width: 200px;
+    transform: rotate(8deg);
+    opacity: 0.7;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .matheus-bio p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 17px;
+    color: var(--ink-2);
+    margin-bottom: 18px;
+    line-height: 1.7;
+    font-weight: 400;
+  }
+  .matheus-bio p strong { color: var(--ink); font-weight: 700; }
+  .matheus-bio p:last-of-type {
+    color: var(--ink);
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(22px, 2.2vw, 30px);
+    line-height: 1.15;
+    text-transform: uppercase;
+    font-weight: 400;
+    margin-top: 8px;
+    letter-spacing: -0.005em;
+  }
+  .matheus-bio p:last-of-type .red { color: var(--accent); }
+  .matheus-numeros {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 36px;
+    padding-top: 36px;
+    border-top: 2px solid var(--ink);
+  }
+  .num-bloco .num {
+    font-family: 'Anton', sans-serif;
+    font-size: 42px;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .num-bloco .label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    color: var(--ink-3);
+    letter-spacing: 0.02em;
+    font-weight: 500;
+  }
+
+  /* === COMO FUNCIONA === */
+  .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 28px; }
+  .step { text-align: left; position: relative; }
+  .step-num {
+    width: 56px;
+    height: 56px;
+    background: var(--accent);
+    color: #FFF;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Anton', sans-serif;
+    font-size: 24px;
+    margin-bottom: 22px;
+  }
+  .step h4 {
+    font-family: 'Anton', sans-serif;
+    font-size: 22px;
+    font-weight: 400;
+    margin-bottom: 10px;
+    letter-spacing: -0.005em;
+    text-transform: uppercase;
+    color: var(--ink);
+    line-height: 1.1;
+  }
+  .step p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: var(--ink-2);
+    line-height: 1.6;
+    font-weight: 400;
+  }
+
+  /* === FAQ === */
+  .faq-list { display: flex; flex-direction: column; gap: 12px; max-width: 820px; margin: 0 auto; }
+  .faq-item {
+    background: transparent;
+    position: relative;
+    transition: transform 0.2s, filter 0.2s;
+    filter:
+      drop-shadow(0 1px 2px rgba(74, 47, 12, 0.12))
+      drop-shadow(0 4px 10px rgba(74, 47, 12, 0.08));
+  }
+  .faq-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--bg-card);
+    -webkit-mask-image: var(--tear-mask);
+    mask-image: var(--tear-mask);
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    z-index: 0;
+  }
+  .faq-item > * { position: relative; z-index: 2; }
+  .faq-q {
+    width: 100%;
+    background: transparent;
+    border: none;
+    padding: 26px 30px;
+    text-align: left;
+    color: var(--ink);
+    font-family: 'Poppins', sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  .faq-q::after {
+    content: '+';
+    color: var(--accent);
+    font-family: 'Anton', sans-serif;
+    font-size: 32px;
+    transition: transform 0.3s;
+  }
+  .faq-item.open .faq-q::after { transform: rotate(45deg); }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+  .faq-a-inner {
+    padding: 0 30px 26px;
+    color: var(--ink-2);
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    font-weight: 400;
+  }
+  .faq-a-inner strong { color: var(--ink); font-weight: 600; }
+  .faq-item.open .faq-a { max-height: 600px; }
+
+  /* === CTA FINAL === */
+  .cta-final { padding: 140px 0; text-align: center; position: relative; overflow: hidden; }
+  .cta-final-clip {
+    position: absolute;
+    top: 80px;
+    left: -50px;
+    width: 250px;
+    opacity: 0.55;
+    transform: rotate(-15deg);
+    pointer-events: none;
+  }
+  .cta-final-clip-2 {
+    position: absolute;
+    bottom: 60px;
+    right: -50px;
+    width: 220px;
+    opacity: 0.5;
+    transform: rotate(12deg);
+    pointer-events: none;
+  }
+  @media (max-width: 900px) { .cta-final-clip, .cta-final-clip-2 { display: none; } }
+
+  .cta-final h2 {
+    font-size: clamp(32px, 4.6vw, 60px);
+    max-width: 820px;
+    margin: 0 auto 28px;
+    position: relative;
+    line-height: 1.02;
+  }
+  .cta-final .pull, .cta-final .push {
+    font-family: 'Poppins', sans-serif;
+    color: var(--ink-2);
+    font-size: 17px;
+    max-width: 660px;
+    margin: 0 auto 24px;
+    position: relative;
+    line-height: 1.7;
+    font-weight: 400;
+  }
+  .cta-final .pull strong, .cta-final .push strong { color: var(--ink); font-weight: 700; }
+  .cta-final .push {
+    color: var(--ink-2);
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: clamp(17px, 1.6vw, 20px);
+    line-height: 1.55;
+    padding-top: 28px;
+    border-top: 1px solid var(--ink-line-strong);
+    margin-top: 36px;
+    font-weight: 400;
+    max-width: 600px;
+  }
+  .cta-final .push .red { color: var(--accent); font-weight: 500; }
+  .cta-final-buttons { margin-top: 36px; position: relative; }
+
+  /* === FOOTER === */
+  footer {
+    padding: 56px 0;
+    border-top: 1px solid var(--ink-line);
+    color: var(--ink-3);
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    background: var(--bg);
+  }
+  footer .container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 24px; align-items: center; }
+  footer .logo { font-size: 18px; }
+  footer .legal { font-size: 12px; line-height: 1.6; max-width: 700px; margin-top: 20px; opacity: 0.85; }
+  footer .legal a { color: inherit; border-bottom: 1px solid var(--ink-line-strong); }
+
+  /* === REVEAL === */
+  .rv {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .rv.in { opacity: 1; transform: none; }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 900px) {
+    .etapas-flow { grid-template-columns: 1fr; gap: 20px; }
+    .arrow { transform: rotate(90deg); padding: 8px 0; }
+  }
+  @media (max-width: 768px) {
+    section, .agora { padding: 72px 0; }
+    .hero { padding: 64px 0 48px; }
+    .compare { grid-template-columns: 1fr; clip-path: none; }
+    .compare-col.good { border-left: none; border-top: 1px dashed var(--ink-line-strong); }
+    .matheus-grid { grid-template-columns: 1fr; gap: 36px; }
+    .matheus-numeros { grid-template-columns: 1fr; gap: 16px; }
+    .veiculo { grid-template-columns: 1fr; gap: 14px; padding: 28px; }
+    .hero-checks { flex-direction: column; align-items: center; gap: 14px; }
+    .agora-box { padding: 48px 32px; }
+    .compare-col { padding: 32px; }
+    .clip { padding: 32px 26px; }
+    .jornal-stage { padding: 72px 24px; min-height: 420px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="container">
+    <div class="logo">Matheus <span>·</span> Protocolo 3C</div>
+    <a href="#cta" class="nav-cta"><span class="nav-cta-full">Fazer diagnóstico</span><span class="nav-cta-short">Diagnóstico</span></a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <img class="hero-clip hero-clip-1" src="assets/journal/newsclip-3.png" alt="">
+  <img class="hero-clip hero-clip-2" src="assets/journal/newsclip-5.png" alt="">
+  <div class="container hero-content">
+    <div class="hero-tag rv">
+      <span class="dot"></span>
+      Marketing jurídico de verdade
+    </div>
+    <h1 class="rv">O sistema que faz quem procura advogado <span class="red">encontrar, escolher e fechar</span> com você. Antes de chegar no concorrente.</h1>
+    <p class="hero-sub rv">Em 30 dias, dentro do código de ética, sem virar refém de indicação nem precisar gravar vídeo. As <strong>3 etapas do Protocolo 3C</strong> instaladas e rodando no seu escritório.</p>
+
+    <div class="hero-checks rv">
+      <div class="hero-check">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+        Dentro do código de ética
+      </div>
+      <div class="hero-check">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+        Sem depender de indicação
+      </div>
+      <div class="hero-check">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+        Sem virar influencer
+      </div>
+    </div>
+
+    <div class="rv">
+      <a href="#cta" class="cta-primary">
+        Fazer o diagnóstico em 5 minutos
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <p class="cta-micro">Gratuito. Sem cartão. Retorno em até 24h no WhatsApp.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DOR -->
+<section class="paper-2">
+  <div class="container">
+    <div class="rv" style="text-align: center; margin-bottom: 72px;">
+      <span class="section-pre">Edição #01 · Diagnóstico</span>
+      <h2>Se você é advogado, um desses <span class="red">4 está acontecendo agora.</span></h2>
+    </div>
+
+    <div class="dor-grid">
+      <div class="clip clip-rot-1 dor-card rv">
+        <div class="dor-num">01</div>
+        <p>Seu caixa <strong>oscila demais</strong>. Mês de R$ 40 mil seguido de mês de R$ 8 mil.</p>
+      </div>
+      <div class="clip clip-rot-2 dor-card rv">
+        <div class="dor-num">02</div>
+        <p>Chega contato, mas você <strong>não fecha</strong>. Ou fecha por valor menor do que merece.</p>
+      </div>
+      <div class="clip clip-rot-3 dor-card rv">
+        <div class="dor-num">03</div>
+        <p>Você trabalha <strong>12 horas por dia</strong> e ainda sente que não avança.</p>
+      </div>
+      <div class="clip clip-rot-4 dor-card rv">
+        <div class="dor-num">04</div>
+        <p>Sua principal estratégia ainda é <strong>torcer pra alguém te indicar</strong>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASES -->
+<section>
+  <div class="container">
+    <div class="rv" style="text-align: center; margin-bottom: 72px;">
+      <span class="section-pre">Coluna de cases</span>
+      <h2>Resultados <span class="red">de quem aplicou.</span></h2>
+    </div>
+
+    <div class="cases-grid">
+      <div class="clip clip-rot-2 case-card rv">
+        <div class="case-stamp">Caso<br>01</div>
+        <span class="case-area">Família · Uberlândia</span>
+        <div class="case-result">De R$ 30k para <span class="red">R$ 95k</span> em 4 meses</div>
+        <p class="case-quote">O Google Ads foi só uma das três etapas. Sem fluxo de atendimento e sem script, eu ia faturar mais e atender pior.</p>
+      </div>
+      <div class="clip clip-rot-3 case-card rv">
+        <div class="case-stamp">Caso<br>02</div>
+        <span class="case-area">Previdenciário · Capital</span>
+        <div class="case-result">Custo por contato caiu <span class="red">62%</span> em 60 dias</div>
+        <p class="case-quote">Eu não tinha noção de quanto perdia no atendimento. O processo mudou tudo.</p>
+      </div>
+      <div class="clip clip-rot-1 case-card rv">
+        <div class="case-stamp">Caso<br>03</div>
+        <span class="case-area">Trabalhista · Interior</span>
+        <div class="case-result">3 associados contratados <span class="red">em 8 meses</span></div>
+        <p class="case-quote">Sai da operação. Hoje pilotando o escritório, não correndo atrás dele.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VEÍCULOS ANTIGOS + INIMIGO -->
+<section class="paper-2">
+  <div class="container-sm">
+    <div class="rv" style="margin-bottom: 56px;">
+      <span class="section-pre">O que ninguém te conta</span>
+      <h2>Você já tentou. <span class="red">Não foi culpa sua.</span></h2>
+      <p class="lead">Cada caminho abaixo resolve <strong>UMA peça</strong>. Nenhum deles resolve o sistema. E sem sistema, peça nova vira só mais um custo.</p>
+    </div>
+
+    <div class="veiculos-list">
+      <div class="veiculo rv">
+        <div class="veiculo-num">01</div>
+        <div>
+          <h3>Postagens que <span class="red">não geram cliente</span></h3>
+          <p>Carrossel de "você sabia que" sobre Direito, no automático. <strong>Gera curtida, não gera contrato.</strong> Sem caminho de entrada, sem conversa, sem caixa.</p>
+        </div>
+      </div>
+      <div class="veiculo rv">
+        <div class="veiculo-num">02</div>
+        <div>
+          <h3>Tráfego <span class="red">sem retaguarda</span></h3>
+          <p>Gestor de tráfego sobe campanha sozinho e gera demanda. Sem fluxo de atendimento e sem qualificação, você atende mais, <strong>perde mais, e fica sobrecarregado</strong> sem ver resultado no caixa.</p>
+        </div>
+      </div>
+      <div class="veiculo rv">
+        <div class="veiculo-num">03</div>
+        <div>
+          <h3>Esse <span class="red">não é</span> mais um curso na internet</h3>
+          <p>É o passo a passo completo, <strong>instalado no seu escritório</strong>, pra você levar a sua banca pro próximo nível sem ter que aprender ferramenta nova nem virar marqueteiro.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="inimigo-box rv">
+      <span class="label">O que ninguém te conta</span>
+      <p>Enquanto te vendem <strong>postagem solta, tráfego avulso e curso isolado</strong>, ninguém te entrega o sistema completo. O mercado de marketing jurídico lucra com você comprando peça atrás de peça. Porque peça avulsa nunca resolve, e te obriga a comprar a próxima. E a próxima. <strong>E a próxima.</strong></p>
+    </div>
+
+    <div class="tese-destaque rv">
+      Captar sozinho <span class="red">não resolve</span>.<br>Converter sozinho <span class="red">não resolve</span>.<br>Crescer sozinho <span class="red">não resolve</span>.
+      <span class="tese-destaque-sub">As três peças precisam rodar juntas.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ONE BELIEF · JORNAL -->
+<section class="jornal-section">
+  <div class="jornal-stage">
+    <img class="jornal-deco jornal-deco-1" src="assets/journal/newsclip-2.png" alt="">
+    <img class="jornal-deco jornal-deco-2" src="assets/journal/newsclip-4.png" alt="">
+    <img class="jornal-deco jornal-deco-3" src="assets/journal/newsclip-7.png" alt="">
+
+    <div class="jornal-content">
+      <div class="jornal-pretitle">Edição extraordinária</div>
+      <h2 class="jornal-manchete">Essa é <span class="red">a única</span> forma</h2>
+      <p class="jornal-subtitulo">de ter um escritório com <strong>caixa previsível</strong> sem depender de indicação nem virar influencer. É exatamente isso que o <strong>Protocolo 3C</strong> entrega.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROTOCOLO 3C -->
+<section>
+  <div class="container">
+    <div class="protocolo-intro rv">
+      <span class="section-pre">Manual de instalação</span>
+      <h2>O <span class="red">Protocolo 3C.</span></h2>
+      <p class="lead" style="margin: 0 auto;">Três etapas plugadas, rodando todos os dias no seu escritório. Você não compra anúncio avulso. Você instala um <strong>sistema completo</strong> de Captação, Conversão e Crescimento.</p>
+    </div>
+
+    <div class="etapas-flow">
+      <div class="clip clip-rot-3 etapa rv">
+        <span class="etapa-badge">Etapa 1</span>
+        <h3>Captação<span class="red">.</span></h3>
+        <p class="resolve">Resolve: depender de indicação</p>
+        <p>Seu escritório está na frente de quem já está procurando advogado, no <strong>momento exato da decisão</strong>. Quem busca te encontra primeiro.</p>
+        <ul>
+          <li>Anúncios no Google dentro do código de ética</li>
+          <li>Site que comunica em segundos</li>
+          <li>Presença no Google Maps otimizada</li>
+        </ul>
+      </div>
+
+      <div class="arrow">→</div>
+
+      <div class="clip clip-rot-2 etapa rv">
+        <span class="etapa-badge">Etapa 2</span>
+        <h3>Conversão<span class="red">.</span></h3>
+        <p class="resolve">Resolve: perder o contato no atendimento</p>
+        <p>Só <strong>pessoa séria</strong> chega no seu WhatsApp, e quando chega, já vem pronta pra virar contrato. Você atende menos e fecha mais.</p>
+        <ul>
+          <li>Fluxo de atendimento validado</li>
+          <li>Qualificação por etapas</li>
+          <li>Script de fechamento dentro do código de ética</li>
+        </ul>
+      </div>
+
+      <div class="arrow">→</div>
+
+      <div class="clip clip-rot-1 etapa rv">
+        <span class="etapa-badge">Etapa 3</span>
+        <h3>Crescimento<span class="red">.</span></h3>
+        <p class="resolve">Resolve: faturar mais sem se sobrecarregar mais</p>
+        <p>Cada contrato fechado vira <strong>combustível pro próximo</strong>. Sistema rodando todo dia, evoluindo todo mês, virando ativo do escritório.</p>
+        <ul>
+          <li>Painel de evolução com indicadores</li>
+          <li>Otimização contínua das campanhas</li>
+          <li>Mapa de oportunidades de expansão</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tese-destaque rv">
+      Não é tráfego. É <span class="red">Protocolo 3C</span>.
+      <span class="tese-destaque-sub">Captação. Conversão. Crescimento.</span>
+    </div>
+  </div>
+</section>
+
+<!-- DIFERENCIAL -->
+<section class="paper-2">
+  <div class="container-sm">
+    <div class="rv" style="text-align: center; margin-bottom: 56px;">
+      <span class="section-pre">Comparativo</span>
+      <h2>Por que isso é diferente <span class="red">do que você já viu.</span></h2>
+    </div>
+
+    <div class="compare rv">
+      <div class="compare-col bad">
+        <div class="compare-title">O mercado oferece</div>
+        <ul class="compare-list">
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> <span class="struck">Tráfego pago avulso</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> <span class="struck">Postagem de "você sabia que"</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> <span class="struck">Contato jogado no seu WhatsApp</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> <span class="struck">Promessa de mais cliente</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> <span class="struck">Você vira influencer</span></li>
+        </ul>
+      </div>
+      <div class="compare-col good">
+        <div class="compare-title">Protocolo 3C entrega</div>
+        <ul class="compare-list">
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Sistema rodando todos os dias</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Autoridade construída sem virar criador</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Atendimento triado por etapas</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Promessa de mais <span class="underlined">contrato fechado</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Você vira dono de banca</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POR QUE AGORA -->
+<section class="agora">
+  <div class="container-sm">
+    <div class="agora-box rv">
+      <div class="stamp-urgent">Urgente</div>
+      <span class="agora-tag">Por que esperar custa caro</span>
+      <h2>A vaga do primeiro lugar <span class="red">é uma só.</span></h2>
+      <p>Cada mês que passa, mais escritórios da sua cidade estão instalando sistema. Quem busca advogado na sua área <strong>hoje encontra eles, não você</strong>.</p>
+      <p><strong>O Google não mostra dois primeiros lugares.</strong> Existe UM primeiro. E enquanto você adia a decisão, alguém na sua região ocupa essa vaga.</p>
+      <p>Recuperar terreno depois <strong>custa muito mais caro</strong> do que chegar primeiro. Não porque o investimento sobe, mas porque o mercado fica mais maduro, mais competitivo, e mais difícil de furar.</p>
+      <p class="destaque">A janela está aberta. <span class="red">Não vai ficar.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- STACK -->
+<section class="paper-2">
+  <div class="container-sm">
+    <div class="rv" style="text-align: center; margin-bottom: 64px;">
+      <span class="section-pre">O que está incluso</span>
+      <h2>Plug and play. <span class="red">Você só precisa atender.</span></h2>
+      <p class="lead" style="margin: 0 auto;">Peças instaladas e rodando no seu escritório em até 30 dias. Sem você ter que aprender ferramenta nova, sem gravar vídeo, sem virar marqueteiro.</p>
+    </div>
+
+    <div class="stack-list">
+      <div class="stack-item rv">
+        <div class="stack-check"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div>
+          <h4>Raio-X do seu escritório</h4>
+          <p>Diagnóstico inicial em 90 minutos. Identifica por qual etapa o sistema vai começar a rodar primeiro.</p>
+        </div>
+      </div>
+      <div class="stack-item rv">
+        <div class="stack-check"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div>
+          <h4>Site dentro do código de ética</h4>
+          <p>Página única, pronta, validada. Quem clica em anúncio cai aqui e entende em 5 segundos por que falar com você.</p>
+        </div>
+      </div>
+      <div class="stack-item rv">
+        <div class="stack-check"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div>
+          <h4>Anúncios no Google rodando 90 dias</h4>
+          <p>Configurados, otimizados e geridos. Quem busca advogado na sua área te encontra primeiro.</p>
+        </div>
+      </div>
+      <div class="stack-item rv">
+        <div class="stack-check"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div>
+          <h4>Fluxo de atendimento validado</h4>
+          <p>Filtro de entrada que separa curioso de quem realmente quer contratar. Você só atende contato sério.</p>
+        </div>
+      </div>
+      <div class="stack-item rv">
+        <div class="stack-check"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div>
+          <h4>Script de atendimento e fechamento</h4>
+          <p>Roteiro estruturado pra você ou pra secretária. Da primeira mensagem ao "vamos assinar".</p>
+        </div>
+      </div>
+      <div class="stack-item rv">
+        <div class="stack-check"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div>
+          <h4>Acompanhamento quinzenal</h4>
+          <p>Reunião de 30 minutos a cada 15 dias pra ler resultado, ajustar o sistema e responder dúvidas.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="stack-footer rv">
+      <a href="#cta" class="cta-primary">
+        Solicite hoje mesmo um orçamento
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- MATHEUS -->
+<section>
+  <div class="container">
+    <div class="rv" style="margin-bottom: 56px;">
+      <span class="section-pre">Editorial</span>
+      <h2>Quem é o <span class="red">Matheus.</span></h2>
+    </div>
+
+    <div class="matheus-grid">
+      <div class="matheus-img-wrap rv">
+        <div class="matheus-img">
+          <img src="assets/matheus.png" alt="Matheus Esteves">
+        </div>
+        <div class="matheus-tag">Exclusivo</div>
+        <img class="matheus-img-clip" src="assets/journal/newsclip-6.png" alt="">
+      </div>
+      <div class="matheus-bio rv">
+        <p>Sou formado em Direito. Saí da advocacia, fui pro outro lado do balcão e passei anos vendo de dentro como o mercado de marketing jurídico <strong>fatura vendendo peça solta</strong> pra advogado. Anúncio aqui, curso ali, social media acolá, sem nunca entregar um sistema completo.</p>
+        <p>Construí o <strong>Protocolo 3C</strong> justamente com o que aprendi vendo a máquina por dentro. Hoje opero campanhas para dezenas de escritórios, centenas de milhares investidos por mês em mídia, com um único compromisso.</p>
+        <p>O que o mercado vende em peça, eu entrego em <span class="red">sistema.</span></p>
+
+        <div class="matheus-numeros">
+          <div class="num-bloco">
+            <div class="num">R$ XM+</div>
+            <div class="label">em mídia operada</div>
+          </div>
+          <div class="num-bloco">
+            <div class="num">XX+</div>
+            <div class="label">escritórios estruturados</div>
+          </div>
+          <div class="num-bloco">
+            <div class="num">X anos</div>
+            <div class="label">no nicho jurídico</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section class="paper-2">
+  <div class="container-sm">
+    <div class="rv" style="margin-bottom: 64px;">
+      <span class="section-pre">Próximos passos</span>
+      <h2>O que acontece depois que <span class="red">você clica no botão.</span></h2>
+    </div>
+
+    <div class="steps-grid">
+      <div class="step rv">
+        <div class="step-num">1</div>
+        <h4>Diagnóstico inicial</h4>
+        <p>Você responde um formulário curto (5 min) que valida se o seu escritório se encaixa no Protocolo.</p>
+      </div>
+      <div class="step rv">
+        <div class="step-num">2</div>
+        <h4>Conversa estratégica</h4>
+        <p>Se houver fit, marcamos uma call gratuita de 45 minutos pra ler o cenário do seu escritório.</p>
+      </div>
+      <div class="step rv">
+        <div class="step-num">3</div>
+        <h4>Plano personalizado</h4>
+        <p>Você sai da call sabendo por qual etapa o sistema deve começar. Com ou sem trabalhar comigo.</p>
+      </div>
+      <div class="step rv">
+        <div class="step-num">4</div>
+        <h4>Decisão sua</h4>
+        <p>Se fizer sentido, te mostro como instalar o Protocolo no seu escritório. Se não, você sai com diagnóstico gratuito.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="container-sm">
+    <div class="rv" style="text-align: center; margin-bottom: 64px;">
+      <span class="section-pre">FAQ</span>
+      <h2>Antes de você <span class="red">perguntar.</span></h2>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item rv">
+        <button class="faq-q">Isso não é só tráfego pago com nome novo?</button>
+        <div class="faq-a"><div class="faq-a-inner">Não. Tráfego pago é uma das três etapas do Protocolo (a Captação), e <strong>sozinho não resolve</strong>. O que diferencia é o que vem DEPOIS do anúncio. Conversão estruturada e Crescimento contínuo. Quem te entrega só tráfego entrega 30% do problema. O Protocolo entrega os 100%.</div></div>
+      </div>
+      <div class="faq-item rv">
+        <button class="faq-q">Você é advogado? Tem OAB?</button>
+        <div class="faq-a"><div class="faq-a-inner">Não tenho OAB ativa. Sou formado em Direito, mas escolhi o lado do marketing. E foi exatamente isso que me permitiu enxergar o que advogado dentro do sistema não enxerga. Atuo como gestor de marketing jurídico, não como advogado, e isso está claro no contrato.</div></div>
+      </div>
+      <div class="faq-item rv">
+        <button class="faq-q">E o código de ética? Posso fazer isso sem ferir a OAB?</button>
+        <div class="faq-a"><div class="faq-a-inner">Sim. Todo o sistema é construído dentro do que o código permite. A forma de aparecer, a forma de comunicar, a forma de atender. <strong>Nenhuma peça do Protocolo coloca a sua inscrição em risco.</strong></div></div>
+      </div>
+      <div class="faq-item rv">
+        <button class="faq-q">Eu já tentei marketing antes e não deu resultado. Por que dessa vez seria diferente?</button>
+        <div class="faq-a"><div class="faq-a-inner">Porque na imensa maioria das vezes, o problema não estava em "marketing". <strong>Estava na etapa errada.</strong> Se entrou contato mas você não fechou, o problema é a Conversão. Se você fechou bem mas o caixa não rendeu, o problema é o Crescimento. O Protocolo mostra exatamente em qual etapa começar.</div></div>
+      </div>
+      <div class="faq-item rv">
+        <button class="faq-q">Quanto custa pra trabalhar com você?</button>
+        <div class="faq-a"><div class="faq-a-inner">O investimento varia conforme o tamanho do escritório e qual etapa do Protocolo precisa girar primeiro. Apresento isso na call estratégica, depois de entender seu caso.</div></div>
+      </div>
+      <div class="faq-item rv">
+        <button class="faq-q">Eu não quero virar influencer ou ficar gravando vídeo. Funciona pra mim?</button>
+        <div class="faq-a"><div class="faq-a-inner">Funciona. <strong>Conteúdo não é o motor do Protocolo.</strong> As três etapas (Captação, Conversão, Crescimento) rodam sem você postar uma linha. Você não precisa virar criador pra ter o sistema funcionando.</div></div>
+      </div>
+      <div class="faq-item rv">
+        <button class="faq-q">Meu cliente não está no Google. Faz sentido pra mim?</button>
+        <div class="faq-a"><div class="faq-a-inner">Faz mais sentido do que parece. Quem precisa de advogado <strong>pesquisa antes de contratar</strong>, mesmo quando recebe indicação. Estar no Google é só uma das peças da Captação. O Protocolo se adapta ao seu perfil de cliente.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final" id="cta">
+  <img class="cta-final-clip" src="assets/journal/newsclip-3.png" alt="">
+  <img class="cta-final-clip-2" src="assets/journal/newsclip-8.png" alt="">
+  <div class="container-sm">
+    <h2 class="rv">Você não precisa de outro curso. Precisa do <span class="red">sistema certo.</span></h2>
+
+    <p class="pull rv">O diagnóstico é <strong>gratuito e sem compromisso</strong>. Se o seu escritório não se encaixar, eu mesmo te falo. Você sai com um raio-x do seu negócio sem pagar nada.</p>
+
+    <div class="cta-final-buttons rv">
+      <a href="#" class="cta-primary">
+        Começar o diagnóstico agora
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <p class="cta-micro">Sem custo. Sem compromisso. Resposta em até 24h no WhatsApp.</p>
+    </div>
+
+    <p class="push rv">Mas se você não fizer nada, daqui a 6 meses seu caixa ainda vai oscilar, você ainda vai trabalhar 12 horas e ainda vai torcer pra alguém te indicar. <span class="red">A escolha é sua.</span></p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div>
+      <div class="logo">Matheus <span>·</span> Protocolo 3C</div>
+      <div class="legal">© 2026 · Marketing jurídico operado por Matheus Esteves. Não exerço advocacia. Atuo como gestor de marketing dentro do que o código de ética da OAB permite. Os resultados apresentados refletem casos reais, mas não constituem promessa de resultado.</div>
+    </div>
+    <div>contato@matheus.com · @matheus.protocolo3c</div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('.rv').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
