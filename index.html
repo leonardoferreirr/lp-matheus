@@ -295,33 +295,110 @@
     font-size: 16px;
   }
 
-  /* VEÍCULOS */
-  .veiculos-list { display: grid; gap: 16px; margin-bottom: 48px; position: relative; }
-  .veiculo {
+  /* VEÍCULOS · Venn diagram (3 dores caminhando juntas) */
+  .venn-wrap { margin-bottom: 48px; }
+  .venn {
+    position: relative;
+    max-width: 520px;
+    margin: 0 auto 56px;
+    aspect-ratio: 600 / 540;
+  }
+  .venn svg { width: 100%; height: 100%; display: block; overflow: visible; }
+  .vc {
+    fill-opacity: 0.55;
+    stroke-width: 1.5;
+    stroke-opacity: 0.6;
+    mix-blend-mode: multiply;
+    transition: fill-opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .vc-a { fill: #C5FF3A; stroke: #4a6c00; }
+  .vc-b { fill: #4a6c00; stroke: #2c4400; fill-opacity: 0.42; }
+  .vc-c { fill: #1f1f1f; stroke: #000;   fill-opacity: 0.28; }
+  .venn:hover .vc { fill-opacity: 0.65; }
+  .venn:hover .vc-b { fill-opacity: 0.5; }
+  .venn:hover .vc-c { fill-opacity: 0.34; }
+
+  .vlabel {
+    position: absolute;
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: clamp(12px, 1.15vw, 14px);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #1f2d00;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .vlabel-a { top: 3%; left: 6%; }
+  .vlabel-b { top: 3%; right: 6%; }
+  .vlabel-c { bottom: 3%; left: 50%; transform: translateX(-50%); }
+  .vlabel-core {
+    position: absolute;
+    top: 53%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-family: 'Sora', sans-serif;
+    pointer-events: none;
+    line-height: 1.1;
+  }
+  .vlabel-core span {
+    display: block;
+    font-weight: 800;
+    font-size: clamp(15px, 1.6vw, 19px);
+    color: #FAFAFA;
+    letter-spacing: -0.02em;
+    text-shadow: 0 1px 12px rgba(0,0,0,0.35);
+  }
+  .vlabel-core em {
+    display: block;
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(20px, 2.1vw, 26px);
+    color: #C5FF3A;
+    margin-top: 4px;
+    letter-spacing: -0.01em;
+    text-shadow: 0 1px 12px rgba(0,0,0,0.45);
+  }
+
+  .venn-legend {
+    list-style: none;
+    padding: 0;
+    margin: 0;
     display: grid;
-    grid-template-columns: 80px 1fr;
-    gap: 32px;
-    padding: 36px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .vleg {
     background: var(--bg-card);
     border: 1px solid var(--border);
-    border-radius: 20px;
-    align-items: start;
-    transition: border-color 0.3s, transform 0.3s, box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    border-top: 3px solid;
+    border-radius: 14px;
+    padding: 24px 22px;
+    transition: transform 0.3s, box-shadow 0.4s, border-color 0.3s;
   }
-  .veiculo-num {
-    font-family: 'Instrument Serif', serif;
-    font-size: 48px;
-    font-weight: 400;
-    font-style: italic;
-    color: var(--accent);
-    line-height: 1;
+  .vleg:hover { transform: translateY(-4px); box-shadow: 0 18px 36px -20px rgba(10,10,11,0.22); }
+  .vleg-a { border-top-color: #A8E516; }
+  .vleg-b { border-top-color: #4a6c00; }
+  .vleg-c { border-top-color: #1f1f1f; }
+  .vleg-tag {
+    display: inline-block;
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    padding: 4px 10px;
+    border-radius: 999px;
   }
-  .section-light .veiculo-num { color: #4a6c00; }
-  .veiculo h3 { font-family: 'Sora', sans-serif; font-size: 22px; font-weight: 600; margin-bottom: 8px; letter-spacing: -0.01em; }
-  .veiculo p { color: var(--text-2); font-size: 16px; line-height: 1.6; }
-  .veiculo p strong { color: var(--text); font-weight: 600; }
-
-  /* veiculos em grid normal, sem sticky-stack, sem dead space */
+  .vleg-a .vleg-tag { background: rgba(168, 229, 22, 0.28); color: #2c4400; }
+  .vleg-b .vleg-tag { background: rgba(74, 108, 0, 0.22); color: #2c4400; }
+  .vleg-c .vleg-tag { background: rgba(20, 20, 20, 0.10); color: #1f1f1f; }
+  .vleg h4 { font-family: 'Sora', sans-serif; font-size: 18px; font-weight: 600; margin-bottom: 8px; letter-spacing: -0.01em; line-height: 1.25; }
+  .vleg p { color: var(--text-2); font-size: 14.5px; line-height: 1.6; }
+  .vleg p strong { color: var(--text); font-weight: 600; }
 
   .inimigo-box {
     background: var(--bg-card);
@@ -914,8 +991,14 @@
     .matheus-numeros { grid-template-columns: 1fr; gap: 14px; text-align: left; }
     .matheus-numeros .num-bloco { display: flex; align-items: baseline; gap: 12px; }
     .matheus-numeros .num-bloco .num { font-size: 26px; margin: 0; }
-    .veiculo { grid-template-columns: 1fr; gap: 8px; padding: 24px; }
-    .veiculo-num { font-size: 36px; }
+    .venn { max-width: 360px; margin: 0 auto 40px; }
+    .vlabel { font-size: 11px; }
+    .vlabel-a { top: 2%; left: 2%; }
+    .vlabel-b { top: 2%; right: 2%; }
+    .vlabel-core span { font-size: 14px; }
+    .vlabel-core em { font-size: 18px; }
+    .venn-legend { grid-template-columns: 1fr; gap: 12px; }
+    .vleg { padding: 20px 18px; }
     .agora-box { padding: 32px 22px; }
     .etapa { padding: 28px 22px; }
     .belief-section { padding: 80px 16px; }
@@ -1027,28 +1110,38 @@
       <h2>Você já tentou. <em>Não foi culpa sua.</em></h2>
       <p class="lead">Cada caminho abaixo resolve UMA peça. Nenhum deles resolve o sistema. E sem sistema, peça nova vira só mais um custo.</p>
     </div>
-    <div class="veiculos-list">
-      <div class="veiculo rv">
-        <div class="veiculo-num">01</div>
-        <div>
-          <h3>Postagens que não geram cliente</h3>
+    <div class="venn-wrap rv">
+      <div class="venn">
+        <svg viewBox="0 0 600 540" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="220" cy="220" r="180" class="vc vc-a"/>
+          <circle cx="380" cy="220" r="180" class="vc vc-b"/>
+          <circle cx="300" cy="370" r="180" class="vc vc-c"/>
+        </svg>
+        <span class="vlabel vlabel-a">Postagens</span>
+        <span class="vlabel vlabel-b">Tráfego pago</span>
+        <span class="vlabel vlabel-c">Cursos online</span>
+        <div class="vlabel-core">
+          <span>Peça solta.</span>
+          <em>Sem sistema.</em>
+        </div>
+      </div>
+      <ul class="venn-legend">
+        <li class="vleg vleg-a">
+          <span class="vleg-tag">Postagens</span>
+          <h4>Postagens que não geram cliente</h4>
           <p>Carrossel de "você sabia que" sobre Direito, no automático. <strong>Gera curtida, não gera contrato.</strong> Sem caminho de entrada, sem conversa, sem caixa.</p>
-        </div>
-      </div>
-      <div class="veiculo rv">
-        <div class="veiculo-num">02</div>
-        <div>
-          <h3>Tráfego sem retaguarda</h3>
+        </li>
+        <li class="vleg vleg-b">
+          <span class="vleg-tag">Tráfego pago</span>
+          <h4>Tráfego sem retaguarda</h4>
           <p>Gestor de tráfego sobe campanha sozinho e gera demanda. Sem fluxo de atendimento e sem qualificação, você atende mais, <strong>perde mais, e fica sobrecarregado</strong> sem ver resultado no caixa.</p>
-        </div>
-      </div>
-      <div class="veiculo rv">
-        <div class="veiculo-num">03</div>
-        <div>
-          <h3>Cursos de internet que não trazem resultado</h3>
-          <p>É o passo a passo completo, <strong>instalado no seu escritório</strong>, pra você levar a sua banca pro próximo nível sem ter que aprender ferramenta nova nem virar marqueteiro.</p>
-        </div>
-      </div>
+        </li>
+        <li class="vleg vleg-c">
+          <span class="vleg-tag">Cursos online</span>
+          <h4>Cursos de internet que não trazem resultado</h4>
+          <p>Você compra curso, assiste no fim de semana, anota um monte de coisa. Segunda volta a rotina, <strong>ninguém implementa, nada muda.</strong> Aprender ferramenta não é o mesmo que instalar sistema.</p>
+        </li>
+      </ul>
     </div>
   </div>
 </section>
