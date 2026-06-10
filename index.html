@@ -540,7 +540,7 @@
     max-width: 880px;
     margin: 0 auto;
     background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-2) 100%);
-    border: 1px solid var(--warn);
+    border: 1px solid var(--accent);
     border-radius: 20px;
     padding: 56px 48px;
     position: relative;
@@ -553,28 +553,11 @@
     right: -120px;
     width: 360px;
     height: 360px;
-    background: radial-gradient(circle, var(--warn-dim) 0%, transparent 60%);
+    background: radial-gradient(circle, var(--accent-dim-2) 0%, transparent 60%);
     pointer-events: none;
   }
-  .agora-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--warn-dim);
-    border: 1px solid var(--warn);
-    color: var(--warn);
-    padding: 6px 14px;
-    border-radius: 999px;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 24px;
-    position: relative;
-  }
   .agora-box h2 { margin-bottom: 28px; position: relative; }
-  .agora-box h2 em { color: var(--warn); }
+  .agora-box h2 em { color: var(--accent); }
   .agora-box p { font-size: 17px; color: var(--text-2); line-height: 1.7; margin-bottom: 20px; position: relative; }
   .agora-box p strong { color: var(--text); font-weight: 600; }
   .agora-box p.destaque {
@@ -587,7 +570,7 @@
     padding-top: 32px;
     border-top: 1px solid var(--border);
   }
-  .agora-box p.destaque em { color: var(--warn); }
+  .agora-box p.destaque em { color: var(--accent); }
 
   /* STACK */
   .stack-list { display: grid; gap: 12px; max-width: 780px; margin: 0 auto 48px; position: relative; }
@@ -685,35 +668,122 @@
   }
   .num-bloco .label { font-size: 13px; color: var(--text-3); font-weight: 500; }
 
-  /* COMO FUNCIONA */
-  .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
-  .step {
-    text-align: left;
-    padding: 28px;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    transition: border-color 0.3s, transform 0.3s;
+  /* ROADMAP — 4 steps em timeline horizontal animada */
+  .roadmap {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
   }
-  .step:hover { border-color: var(--accent); transform: translateY(-4px); }
-  .step-num {
-    width: 48px;
-    height: 48px;
-    background: var(--accent-dim);
-    border: 1px solid var(--accent);
-    color: var(--accent);
-    border-radius: 12px;
+  /* trilha de fundo (apagada) */
+  .roadmap::before {
+    content: '';
+    position: absolute;
+    top: 33px;
+    left: 12.5%;
+    right: 12.5%;
+    height: 2px;
+    background: var(--border);
+    z-index: 0;
+  }
+  /* trilha preenchida (lime) — anima conforme cada step entra */
+  .roadmap::after {
+    content: '';
+    position: absolute;
+    top: 33px;
+    left: 12.5%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--accent-2) 100%);
+    width: calc(var(--roadmap-progress, 0) * (75%));
+    z-index: 1;
+    transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 0 12px var(--accent-dim-2);
+  }
+  .roadmap-step {
+    position: relative;
+    text-align: center;
+    z-index: 2;
+  }
+  .roadmap-marker {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--border);
+    color: var(--text-3);
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: 'Sora', sans-serif;
     font-weight: 700;
-    font-size: 18px;
-    margin-bottom: 20px;
+    font-size: 22px;
+    margin: 0 auto 24px;
+    position: relative;
+    transition: border-color 0.6s cubic-bezier(0.22, 1, 0.36, 1), color 0.6s, background 0.6s, transform 0.6s, box-shadow 0.6s;
   }
-  .section-light .step-num { background: rgba(168, 229, 22, 0.18); color: #3d5a00; border-color: #3d5a00; }
-  .step h4 { font-family: 'Sora', sans-serif; font-size: 18px; font-weight: 600; margin-bottom: 10px; letter-spacing: -0.01em; }
-  .step p { font-size: 14px; color: var(--text-2); line-height: 1.6; }
+  .roadmap-marker::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    background: var(--accent-dim);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.6s, transform 0.6s;
+  }
+  .roadmap-step.in .roadmap-marker {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--bg);
+    box-shadow: 0 8px 32px var(--accent-dim-2);
+  }
+  .roadmap-step.in .roadmap-marker::before {
+    opacity: 1;
+    animation: ripple 1.6s ease-out 0.2s 1;
+  }
+  @keyframes ripple {
+    0% { opacity: 0.8; transform: scale(0.5); }
+    100% { opacity: 0; transform: scale(1.6); }
+  }
+  .section-light .roadmap-step.in .roadmap-marker { color: #3d5a00; border-color: #3d5a00; }
+  .roadmap-step h4 {
+    font-family: 'Sora', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+    opacity: 0.5;
+    transition: opacity 0.6s 0.1s;
+  }
+  .roadmap-step.in h4 { opacity: 1; }
+  .roadmap-step p {
+    font-size: 14px;
+    color: var(--text-2);
+    line-height: 1.6;
+    opacity: 0.5;
+    transition: opacity 0.6s 0.15s;
+  }
+  .roadmap-step.in p { opacity: 1; }
+  @media (max-width: 768px) {
+    .roadmap { grid-template-columns: 1fr; gap: 28px; }
+    .roadmap::before, .roadmap::after { display: none; }
+    .roadmap-step { display: grid; grid-template-columns: 80px 1fr; gap: 20px; text-align: left; align-items: start; }
+    .roadmap-marker { margin: 0; }
+    .roadmap-step:not(:last-child) .roadmap-marker::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 32px;
+      background: var(--border);
+    }
+    .roadmap-step.in:not(:last-child) .roadmap-marker::after { background: var(--accent); }
+  }
 
   /* FAQ */
   .faq-list { display: flex; flex-direction: column; gap: 12px; max-width: 800px; margin: 0 auto; }
@@ -1018,7 +1088,7 @@
 <section>
   <div class="container-sm">
     <div class="agora-box rv">
-      <h2>A vaga do primeiro lugar <em>é uma só.</em></h2>
+      <h2>A vaga do primeiro lugar<br><em>é uma só.</em></h2>
       <p>Cada mês que passa, mais escritórios da sua cidade estão instalando sistema. Quem busca advogado na sua área <strong>hoje encontra eles, não você</strong>.</p>
       <p><strong>O Google não mostra dois primeiros lugares.</strong> Existe UM primeiro. E enquanto você adia a decisão, alguém na sua região ocupa essa vaga.</p>
       <p>Recuperar terreno depois custa muito mais caro do que chegar primeiro. Não porque o investimento sobe, mas porque o mercado fica mais maduro, mais competitivo, e mais difícil de furar.</p>
@@ -1096,12 +1166,28 @@
     <div class="rv" style="margin-bottom: 56px;">
       <h2>O que acontece depois que <em>você clica no botão.</em></h2>
     </div>
-    <div class="steps-grid">
-      <div class="step rv"><div class="step-num">1</div><h4>Diagnóstico inicial</h4><p>Você responde um formulário curto (5 min) que valida se o seu escritório se encaixa no Protocolo.</p></div>
-      <div class="step rv" data-d="1"><div class="step-num">2</div><h4>Conversa estratégica</h4><p>Se houver fit, marcamos uma call gratuita de 45 minutos pra ler o cenário do seu escritório.</p></div>
-      <div class="step rv" data-d="2"><div class="step-num">3</div><h4>Plano personalizado</h4><p>Você sai da call sabendo por qual etapa o sistema deve começar. Com ou sem trabalhar comigo.</p></div>
-      <div class="step rv" data-d="3"><div class="step-num">4</div><h4>Decisão sua</h4><p>Se fizer sentido, te mostro como instalar o Protocolo no seu escritório. Se não, você sai com diagnóstico gratuito.</p></div>
-    </div>
+    <ol class="roadmap" id="roadmap">
+      <li class="roadmap-step">
+        <div class="roadmap-marker">1</div>
+        <h4>Diagnóstico inicial</h4>
+        <p>Você responde um formulário curto (5 min) que valida se o seu escritório se encaixa no Protocolo.</p>
+      </li>
+      <li class="roadmap-step">
+        <div class="roadmap-marker">2</div>
+        <h4>Conversa estratégica</h4>
+        <p>Se houver fit, marcamos uma call gratuita de 45 minutos pra ler o cenário do seu escritório.</p>
+      </li>
+      <li class="roadmap-step">
+        <div class="roadmap-marker">3</div>
+        <h4>Plano personalizado</h4>
+        <p>Você sai da call sabendo por qual etapa o sistema deve começar. Com ou sem trabalhar comigo.</p>
+      </li>
+      <li class="roadmap-step">
+        <div class="roadmap-marker">4</div>
+        <h4>Decisão sua</h4>
+        <p>Se fizer sentido, te mostro como instalar o Protocolo no seu escritório. Se não, você sai com diagnóstico gratuito.</p>
+      </li>
+    </ol>
   </div>
 </section>
 
@@ -1163,6 +1249,32 @@
     });
   }, { threshold: 0.08, rootMargin: '0px 0px -8% 0px' });
   document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+  // Roadmap: cada step ativa em sequencia + linha conecta
+  const roadmap = document.getElementById('roadmap');
+  if (roadmap) {
+    const steps = Array.from(roadmap.querySelectorAll('.roadmap-step'));
+    const total = steps.length;
+    const setProgress = () => {
+      const active = steps.filter(s => s.classList.contains('in')).length;
+      const ratio = total > 1 ? (active - 1) / (total - 1) : 0;
+      roadmap.style.setProperty('--roadmap-progress', Math.max(0, ratio).toFixed(3));
+    };
+    const roadmapIO = new IntersectionObserver((entries) => {
+      entries.forEach((e, idx) => {
+        if (e.isIntersecting) {
+          // delay escalonado pra cada step "acender" na sequencia
+          const stepIdx = steps.indexOf(e.target);
+          setTimeout(() => {
+            e.target.classList.add('in');
+            setProgress();
+          }, stepIdx * 250);
+          roadmapIO.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.4, rootMargin: '0px 0px -10% 0px' });
+    steps.forEach(s => roadmapIO.observe(s));
+  }
 
   // Nav adapta cor conforme a seção embaixo (dark/light)
   const nav = document.querySelector('nav');
