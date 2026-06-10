@@ -295,110 +295,82 @@
     font-size: 16px;
   }
 
-  /* VEÍCULOS · Venn diagram (3 dores caminhando juntas) */
-  .venn-wrap { margin-bottom: 48px; }
-  .venn {
+  /* VEÍCULOS · 3 círculos horizontais sobrepostos (estilo Forset) */
+  .venn-row {
     position: relative;
-    max-width: 520px;
-    margin: 0 auto 56px;
-    aspect-ratio: 600 / 540;
+    max-width: 1120px;
+    margin: 32px auto 48px;
+    aspect-ratio: 1120 / 440;
   }
-  .venn svg { width: 100%; height: 100%; display: block; overflow: visible; }
+  .venn-row svg { width: 100%; height: 100%; display: block; overflow: visible; }
   .vc {
-    fill-opacity: 0.55;
-    stroke-width: 1.5;
-    stroke-opacity: 0.6;
-    mix-blend-mode: multiply;
-    transition: fill-opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    fill: rgba(168, 229, 22, 0.05);
+    stroke: #7AA82E;
+    stroke-width: 2;
+    transition: fill 0.5s ease, stroke 0.5s ease;
   }
-  .vc-a { fill: #C5FF3A; stroke: #4a6c00; }
-  .vc-b { fill: #4a6c00; stroke: #2c4400; fill-opacity: 0.42; }
-  .vc-c { fill: #1f1f1f; stroke: #000;   fill-opacity: 0.28; }
-  .venn:hover .vc { fill-opacity: 0.65; }
-  .venn:hover .vc-b { fill-opacity: 0.5; }
-  .venn:hover .vc-c { fill-opacity: 0.34; }
-
-  .vlabel {
+  .venn-row:hover .vc { fill: rgba(168, 229, 22, 0.09); }
+  .vbubble {
     position: absolute;
-    font-family: 'Sora', sans-serif;
-    font-weight: 700;
-    font-size: clamp(12px, 1.15vw, 14px);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #1f2d00;
-    pointer-events: none;
-    white-space: nowrap;
-  }
-  .vlabel-a { top: 3%; left: 6%; }
-  .vlabel-b { top: 3%; right: 6%; }
-  .vlabel-c { bottom: 3%; left: 50%; transform: translateX(-50%); }
-  .vlabel-core {
-    position: absolute;
-    top: 53%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    width: 24%;
+    top: 50%;
+    transform: translateY(-50%);
     text-align: center;
+    padding: 0 6px;
+  }
+  .vbubble-a { left: 9.8%; }
+  .vbubble-b { left: 38%; }
+  .vbubble-c { left: 66.2%; }
+  .vbubble-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(168, 229, 22, 0.22);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 18px;
+    color: #4a6c00;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), background 0.4s;
+  }
+  .vbubble-icon svg { width: 28px; height: 28px; }
+  .vbubble:hover .vbubble-icon { transform: translateY(-3px); background: rgba(168, 229, 22, 0.35); }
+  .vbubble h4 {
     font-family: 'Sora', sans-serif;
-    pointer-events: none;
-    line-height: 1.1;
-  }
-  .vlabel-core span {
-    display: block;
-    font-weight: 800;
-    font-size: clamp(15px, 1.6vw, 19px);
-    color: #FAFAFA;
-    letter-spacing: -0.02em;
-    text-shadow: 0 1px 12px rgba(0,0,0,0.35);
-  }
-  .vlabel-core em {
-    display: block;
-    font-family: 'Instrument Serif', serif;
-    font-style: italic;
-    font-weight: 400;
-    font-size: clamp(20px, 2.1vw, 26px);
-    color: #C5FF3A;
-    margin-top: 4px;
-    letter-spacing: -0.01em;
-    text-shadow: 0 1px 12px rgba(0,0,0,0.45);
-  }
-
-  .venn-legend {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-  }
-  .vleg {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-top: 3px solid;
-    border-radius: 14px;
-    padding: 24px 22px;
-    transition: transform 0.3s, box-shadow 0.4s, border-color 0.3s;
-  }
-  .vleg:hover { transform: translateY(-4px); box-shadow: 0 18px 36px -20px rgba(10,10,11,0.22); }
-  .vleg-a { border-top-color: #A8E516; }
-  .vleg-b { border-top-color: #4a6c00; }
-  .vleg-c { border-top-color: #1f1f1f; }
-  .vleg-tag {
-    display: inline-block;
-    font-family: 'Sora', sans-serif;
+    font-size: 19px;
     font-weight: 700;
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
     margin-bottom: 12px;
-    padding: 4px 10px;
-    border-radius: 999px;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    line-height: 1.25;
   }
-  .vleg-a .vleg-tag { background: rgba(168, 229, 22, 0.28); color: #2c4400; }
-  .vleg-b .vleg-tag { background: rgba(74, 108, 0, 0.22); color: #2c4400; }
-  .vleg-c .vleg-tag { background: rgba(20, 20, 20, 0.10); color: #1f1f1f; }
-  .vleg h4 { font-family: 'Sora', sans-serif; font-size: 18px; font-weight: 600; margin-bottom: 8px; letter-spacing: -0.01em; line-height: 1.25; }
-  .vleg p { color: var(--text-2); font-size: 14.5px; line-height: 1.6; }
-  .vleg p strong { color: var(--text); font-weight: 600; }
+  .vbubble p {
+    color: var(--text-2);
+    font-size: 14.5px;
+    line-height: 1.55;
+  }
+  .vbubble p strong { color: var(--text); font-weight: 600; }
+
+  @media (max-width: 768px) {
+    .venn-row {
+      aspect-ratio: auto;
+      max-width: 480px;
+      margin: 24px auto 40px;
+      display: grid;
+      gap: 16px;
+    }
+    .venn-row > svg { display: none; }
+    .vbubble {
+      position: static;
+      width: auto;
+      transform: none;
+      padding: 32px 24px;
+      background: rgba(168, 229, 22, 0.06);
+      border: 1.5px solid #7AA82E;
+      border-radius: 24px;
+    }
+    .vbubble-icon { margin-bottom: 14px; }
+  }
 
   .inimigo-box {
     background: var(--bg-card);
@@ -991,14 +963,6 @@
     .matheus-numeros { grid-template-columns: 1fr; gap: 14px; text-align: left; }
     .matheus-numeros .num-bloco { display: flex; align-items: baseline; gap: 12px; }
     .matheus-numeros .num-bloco .num { font-size: 26px; margin: 0; }
-    .venn { max-width: 360px; margin: 0 auto 40px; }
-    .vlabel { font-size: 11px; }
-    .vlabel-a { top: 2%; left: 2%; }
-    .vlabel-b { top: 2%; right: 2%; }
-    .vlabel-core span { font-size: 14px; }
-    .vlabel-core em { font-size: 18px; }
-    .venn-legend { grid-template-columns: 1fr; gap: 12px; }
-    .vleg { padding: 20px 18px; }
     .agora-box { padding: 32px 22px; }
     .etapa { padding: 28px 22px; }
     .belief-section { padding: 80px 16px; }
@@ -1110,38 +1074,33 @@
       <h2>Você já tentou. <em>Não foi culpa sua.</em></h2>
       <p class="lead">Cada caminho abaixo resolve UMA peça. Nenhum deles resolve o sistema. E sem sistema, peça nova vira só mais um custo.</p>
     </div>
-    <div class="venn-wrap rv">
-      <div class="venn">
-        <svg viewBox="0 0 600 540" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <circle cx="220" cy="220" r="180" class="vc vc-a"/>
-          <circle cx="380" cy="220" r="180" class="vc vc-b"/>
-          <circle cx="300" cy="370" r="180" class="vc vc-c"/>
-        </svg>
-        <span class="vlabel vlabel-a">Postagens</span>
-        <span class="vlabel vlabel-b">Tráfego pago</span>
-        <span class="vlabel vlabel-c">Cursos online</span>
-        <div class="vlabel-core">
-          <span>Peça solta.</span>
-          <em>Sem sistema.</em>
+    <div class="venn-row rv">
+      <svg viewBox="0 0 1120 440" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="240" cy="220" r="210" class="vc"/>
+        <circle cx="560" cy="220" r="210" class="vc"/>
+        <circle cx="880" cy="220" r="210" class="vc"/>
+      </svg>
+      <div class="vbubble vbubble-a">
+        <div class="vbubble-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
         </div>
+        <h4>Postagens que não geram cliente</h4>
+        <p>Carrossel de "você sabia que" sobre Direito, no automático. <strong>Gera curtida, não gera contrato.</strong></p>
       </div>
-      <ul class="venn-legend">
-        <li class="vleg vleg-a">
-          <span class="vleg-tag">Postagens</span>
-          <h4>Postagens que não geram cliente</h4>
-          <p>Carrossel de "você sabia que" sobre Direito, no automático. <strong>Gera curtida, não gera contrato.</strong> Sem caminho de entrada, sem conversa, sem caixa.</p>
-        </li>
-        <li class="vleg vleg-b">
-          <span class="vleg-tag">Tráfego pago</span>
-          <h4>Tráfego sem retaguarda</h4>
-          <p>Gestor de tráfego sobe campanha sozinho e gera demanda. Sem fluxo de atendimento e sem qualificação, você atende mais, <strong>perde mais, e fica sobrecarregado</strong> sem ver resultado no caixa.</p>
-        </li>
-        <li class="vleg vleg-c">
-          <span class="vleg-tag">Cursos online</span>
-          <h4>Cursos de internet que não trazem resultado</h4>
-          <p>Você compra curso, assiste no fim de semana, anota um monte de coisa. Segunda volta a rotina, <strong>ninguém implementa, nada muda.</strong> Aprender ferramenta não é o mesmo que instalar sistema.</p>
-        </li>
-      </ul>
+      <div class="vbubble vbubble-b">
+        <div class="vbubble-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+        </div>
+        <h4>Tráfego sem retaguarda</h4>
+        <p>Campanha sobe, contato entra, ninguém qualifica. Você atende mais, <strong>perde mais, e fica sobrecarregado</strong> sem ver no caixa.</p>
+      </div>
+      <div class="vbubble vbubble-c">
+        <div class="vbubble-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        </div>
+        <h4>Cursos que não trazem resultado</h4>
+        <p>Compra, assiste no fim de semana, segunda volta a rotina. <strong>Ninguém implementa, nada muda.</strong> Aprender ferramenta não é instalar sistema.</p>
+      </div>
     </div>
   </div>
 </section>
